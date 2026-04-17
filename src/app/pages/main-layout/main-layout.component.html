@@ -1,0 +1,50 @@
+<mat-sidenav-container class="container">
+
+  <!-- MENU LATERAL -->
+  <mat-sidenav mode="side" opened class="sidenav">
+    <h3 class="logo">SISTEMA GI3</h3>
+
+    <button mat-button routerLink="/principal">
+      <mat-icon>description</mat-icon>
+      Principal
+    </button>
+    <button mat-button routerLink="/prestacao-servico">
+      <mat-icon>payments</mat-icon>
+      Prestação de Serviço
+    </button>
+
+    <button mat-button routerLink="/repasse-bancorbras">
+      <mat-icon>account_balance</mat-icon>
+      Repasse Bancorbras
+    </button>
+
+    <button mat-button routerLink="/repasse-hs">
+      <mat-icon>account_balance</mat-icon>
+      Repasse HS
+    </button>
+
+    <button mat-button routerLink="/usuario">
+      <mat-icon>person</mat-icon>
+      Usuários
+    </button>
+  </mat-sidenav>
+
+  <!-- CONTEÚDO -->
+  <mat-sidenav-content>
+
+    <!-- HEADER -->
+    <mat-toolbar color="primary">
+      <!-- <span>GI3 Sistema</span> -->
+      <span class="spacer"></span>
+      <button mat-icon-button>
+        <mat-icon>logout</mat-icon>
+      </button>
+    </mat-toolbar>
+
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
+
+  </mat-sidenav-content>
+
+</mat-sidenav-container>
