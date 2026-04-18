@@ -28,10 +28,22 @@ export const routes: Routes = [
             .then(m => m.PrestacaoServicoComponent)
       },
       {
+        path: 'prestacao-servico-form',
+        loadComponent: () =>
+          import('./pages/prestacao-servico/form/prestacao-servico-form.component')
+            .then(m => m.PrestacaoServicoFormComponent)
+      },
+      {
         path: 'repasse-bancorbras',
         loadComponent: () =>
           import('./pages/repasse-bancorbras/repasse-bancorbras.component')
             .then(m => m.RepasseBancorbrasComponent)
+      },
+      {
+        path: 'repasse-bancorbras-form',
+        loadComponent: () =>
+          import('./pages/repasse-bancorbras/form/repasse-bancorbras-form.component')
+            .then(m => m.RepasseBancorbrasFormComponent)
       },
       {
         path: 'repasse-hs',
@@ -40,10 +52,28 @@ export const routes: Routes = [
             .then(m => m.RepasseHsComponent)
       },
       {
+        path: 'repasse-hs-form',
+        loadComponent: () =>
+          import('./pages/repasse-hs/form/repasse-hs-form.component')
+            .then(m => m.RepasseHsFormComponent)
+      },
+      {
         path: 'usuario',
         loadComponent: () =>
           import('./pages/usuario/usuario.component')
             .then(m => m.UsuarioComponent)
+      },
+      {
+        path: 'usuario-form',
+        loadComponent: () =>
+          import('./pages/usuario/form/usuario-form.component')
+            .then(m => m.UsuarioFormComponent)
+      },
+      {
+        path: 'upload',
+        loadComponent: () =>
+          import('./pages/upload/upload.component')
+            .then(m => m.UploadComponent)
       },
       {
         path: '',

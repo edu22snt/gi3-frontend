@@ -9,6 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../../shared/confirm-dialog/confirm-dialog.component';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-prestacao-servico',
@@ -47,7 +48,8 @@ export class PrestacaoServicoComponent implements OnInit {
   constructor(
     private service: PrestacaoServicoService,
     private dialog: MatDialog,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private router: Router
 
   ) { }
 
@@ -114,6 +116,11 @@ export class PrestacaoServicoComponent implements OnInit {
 
   edit(id: number):void {
     // Implementar lógica para visualizar detalhes do serviço
+  }
+
+  new(): void {
+    // this.router.navigate(['/prestacao-servico-form']);
+    this.router.navigate(['/upload']);
   }
 
 }

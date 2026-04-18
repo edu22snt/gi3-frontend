@@ -1,0 +1,48 @@
+<form [formGroup]="form" (ngSubmit)="salvar()" class="form-container">
+
+  <mat-card class="title">
+    <mat-card-title>Cadastro de Prestação de Serviço</mat-card-title>
+
+    <mat-card-content>
+
+      <div class="form-grid">
+
+        <mat-form-field appearance="outline">
+          <mat-label>Vendedor</mat-label>
+          <input matInput formControlName="vendedor" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Contrato</mat-label>
+          <input matInput formControlName="contrato" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Parcela</mat-label>
+          <input matInput formControlName="parcela" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Valor</mat-label>
+          <input matInput formControlName="valor" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Empresa</mat-label>
+          <input matInput formControlName="empresa" />
+        </mat-form-field>
+
+      </div>
+
+    </mat-card-content>
+
+    <mat-card-actions align="end">
+      <button mat-stroked-button type="button" (click)="cancelar()">Cancelar</button>
+      <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
+        Salvar
+      </button>
+    </mat-card-actions>
+
+  </mat-card>
+
+</form>
