@@ -18,7 +18,7 @@ export class RepasseHsService {
     private http: HttpClient,
     protected applicationConfigService: ApplicationConfigService
   ) {
-    this.resourceUrl = this.applicationConfigService.getEndpointFor('http://localhost:8080/api/repasseServico');
+    this.resourceUrl = this.applicationConfigService.getEndpointFor('http://localhost:8080/api/repasse');
   }
   
   create(repasse: IRepasseHs): Observable<EntityResponseType> {
@@ -28,10 +28,6 @@ export class RepasseHsService {
   find(id: number): Observable<EntityResponseType> {
     return this.http.get<IRepasseHs>(`${this.resourceUrl}/repasseHs/${id}`, {observe: 'response'});
   }
-  
-  // findAll(): Observable<EntityArrayResponseType> {
-  //   return this.http.get<IRepasseHs[]>(`${this.resourceUrl}/findAllHs`, {observe: 'response'});
-  // }
 
   findAll(page: number = 0, size: number = 10) {
     return this.http.get<IRepasseHs[]>(`${this.resourceUrl}/findAllHs?page=${page}&size=${size}`, { observe: 'response' }

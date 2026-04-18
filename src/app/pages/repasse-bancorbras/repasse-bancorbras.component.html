@@ -1,1 +1,110 @@
-<p>repasse-bancorbras works!</p>
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8 full-width">
+
+  <!-- ID -->
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> ID </th>
+    <td mat-cell *matCellDef="let element"> {{ element.id }} </td>
+  </ng-container>
+
+  <!-- Cliente -->
+  <ng-container matColumnDef="cliente">
+    <th mat-header-cell *matHeaderCellDef> Cliente </th>
+    <td mat-cell *matCellDef="let element"> {{ element.cliente }} </td>
+  </ng-container>
+
+  <!-- Contrato -->
+  <ng-container matColumnDef="contrato">
+    <th mat-header-cell *matHeaderCellDef> Contrato </th>
+    <td mat-cell *matCellDef="let element"> {{ element.contrato }} </td>
+  </ng-container>
+
+  <!-- Venda -->
+  <ng-container matColumnDef="venda">
+    <th mat-header-cell *matHeaderCellDef> venda </th>
+    <td mat-cell *matCellDef="let element"> {{ element.venda }} </td>
+  </ng-container>
+
+  <!-- Mês -->
+  <ng-container matColumnDef="mes">
+    <th mat-header-cell *matHeaderCellDef> Mês </th>
+    <td mat-cell *matCellDef="let element"> {{ element.mes }} </td>
+  </ng-container>
+
+  <!-- Bem -->
+  <ng-container matColumnDef="bem">
+    <th mat-header-cell *matHeaderCellDef> Bem </th>
+    <td mat-cell *matCellDef="let element"> {{ element.bem }} </td>
+  </ng-container>
+
+  <!-- Parcela -->
+  <ng-container matColumnDef="parcela">
+    <th mat-header-cell *matHeaderCellDef> Parcela </th>
+    <td mat-cell *matCellDef="let element"> {{ element.parcela }} </td>
+  </ng-container>
+
+  <!-- Valor Base -->
+  <ng-container matColumnDef="valorBase">
+    <th mat-header-cell *matHeaderCellDef> Valor Base </th>
+    <td mat-cell *matCellDef="let element"> {{ element.valorBase }} </td>
+  </ng-container>
+
+  <!-- Comissão Gi3 -->
+  <ng-container matColumnDef="comissaoGi3">
+    <th mat-header-cell *matHeaderCellDef> Comissão Gi3 </th>
+    <td mat-cell *matCellDef="let element"> {{ element.comissaoGi3 }} </td>
+  </ng-container>
+
+  <!-- Comissão Vendedor -->
+  <ng-container matColumnDef="comissaoVendedor">
+    <th mat-header-cell *matHeaderCellDef> Comissão Vendedor </th>
+    <td mat-cell *matCellDef="let element"> {{ element.comissaoVendedor }} </td>
+  </ng-container>
+
+  <!-- Desconto Comissão -->
+  <ng-container matColumnDef="descontoComissao">
+    <th mat-header-cell *matHeaderCellDef> Desconto Comissão </th>
+    <td mat-cell *matCellDef="let element"> {{ element.descontoComissao }} </td>
+  </ng-container>
+
+  <!-- Comissão Líquida -->
+  <ng-container matColumnDef="comissaoLiquida">
+    <th mat-header-cell *matHeaderCellDef> Comissão Líquida </th>
+    <td mat-cell *matCellDef="let element"> {{ element.comissaoLiquida }} </td>
+  </ng-container>
+
+  <!-- PG -->
+  <ng-container matColumnDef="pg">
+    <th mat-header-cell *matHeaderCellDef> PG </th>
+    <td mat-cell *matCellDef="let element"> {{ element.pg }} </td>
+  </ng-container>
+
+    <!-- Ação -->
+  <ng-container matColumnDef="acoes">
+    <th mat-header-cell *matHeaderCellDef class="acoes-header"> Ações </th>
+    <td mat-cell *matCellDef="let element" class="acoes-cell">
+
+      <button mat-icon-button color="primary" (click)="view(element.id)">
+        <mat-icon>visibility</mat-icon>
+      </button>
+
+      <button mat-icon-button color="accent" (click)="edit(element.id)">
+        <mat-icon>edit</mat-icon>
+      </button>
+
+      <button mat-icon-button color="warn" (click)="confirmDelete(element.id)">
+        <mat-icon>delete</mat-icon>
+      </button>
+
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<mat-paginator
+  [length]="totalElements"
+  [pageSize]="pageSize"
+  [pageSizeOptions]="[5, 10, 20]"
+  (page)="onPageChange($event)">
+</mat-paginator>

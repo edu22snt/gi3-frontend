@@ -18,7 +18,7 @@ export class RepasseBancorbrasService {
     private http: HttpClient,
     protected applicationConfigService: ApplicationConfigService
   ) {
-    this.resourceUrl = this.applicationConfigService.getEndpointFor('http://localhost:8080/api/repasseServico');
+    this.resourceUrl = this.applicationConfigService.getEndpointFor('http://localhost:8080/api/repasse');
   }
 
   create(repasse: IRepasseBancorbras): Observable<EntityResponseType> {
@@ -28,10 +28,6 @@ export class RepasseBancorbrasService {
   find(id: number): Observable<EntityResponseType> {
     return this.http.get<IRepasseBancorbras>(`${this.resourceUrl}/repasseBancorbras/${id}`, {observe: 'response'});
   }
-  
-  // findAll(): Observable<EntityArrayResponseType> {
-  //   return this.http.get<IRepasseBancorbras[]>(`${this.resourceUrl}/findAllBancorbras`, {observe: 'response'});
-  // }
 
   findAll(page: number = 0, size: number = 10) {
     return this.http.get<IRepasseBancorbras[]>(`${this.resourceUrl}/findAllBancorbras?page=${page}&size=${size}`, { observe: 'response' }

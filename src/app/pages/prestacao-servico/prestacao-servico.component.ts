@@ -79,7 +79,7 @@ export class PrestacaoServicoComponent implements OnInit {
 
   confirmDelete(id: number) {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      width: '350px'
+      width: '400px'
     });
 
     dialogRef.afterClosed().subscribe(result => {
