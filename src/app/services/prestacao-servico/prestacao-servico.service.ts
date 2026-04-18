@@ -28,9 +28,10 @@ export class PrestacaoServicoService {
   find(id: number): Observable<EntityResponseType> {
     return this.http.get<IPrestacaoServico>(`${this.resourceUrl}/repasse/${id}`, {observe: 'response'});
   }
-  
-  findAll(): Observable<EntityArrayResponseType> {
-    return this.http.get<IPrestacaoServico[]>(`${this.resourceUrl}/findAll`, {observe: 'response'});
+
+  findAll(page: number = 0, size: number = 10) {
+    return this.http.get<IPrestacaoServico[]>(`${this.resourceUrl}/findAll?page=${page}&size=${size}`, { observe: 'response' }
+    );
   }
 
   update(prestacao: IPrestacaoServico): Observable<EntityResponseType> {

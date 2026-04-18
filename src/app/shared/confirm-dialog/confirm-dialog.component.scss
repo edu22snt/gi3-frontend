@@ -1,0 +1,30 @@
+.dialog-title {
+    padding-top: 5%;
+    text-align: center;
+}
+
+.dialog-content {
+  font-size: 14px;
+  margin-top: 8px;
+
+  p {
+    margin: 0;
+    font-weight: 500;
+  }
+
+  small {
+    display: block;
+    margin-top: 8px;
+    color: #757575;
+  }
+}
+
+.dialog-actions {
+  margin-top: 16px;
+  padding-top: 8px;
+  border-top: 1px solid #eee;
+
+  button {
+    min-width: 100px;
+  }
+}

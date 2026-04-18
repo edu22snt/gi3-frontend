@@ -29,8 +29,13 @@ export class RepasseBancorbrasService {
     return this.http.get<IRepasseBancorbras>(`${this.resourceUrl}/repasseBancorbras/${id}`, {observe: 'response'});
   }
   
-  findAll(): Observable<EntityArrayResponseType> {
-    return this.http.get<IRepasseBancorbras[]>(`${this.resourceUrl}/findAllBancorbras`, {observe: 'response'});
+  // findAll(): Observable<EntityArrayResponseType> {
+  //   return this.http.get<IRepasseBancorbras[]>(`${this.resourceUrl}/findAllBancorbras`, {observe: 'response'});
+  // }
+
+  findAll(page: number = 0, size: number = 10) {
+    return this.http.get<IRepasseBancorbras[]>(`${this.resourceUrl}/findAllBancorbras?page=${page}&size=${size}`, { observe: 'response' }
+    );
   }
 
   update(repasse: IRepasseBancorbras): Observable<EntityResponseType> {

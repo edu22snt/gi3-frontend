@@ -29,8 +29,13 @@ export class RepasseHsService {
     return this.http.get<IRepasseHs>(`${this.resourceUrl}/repasseHs/${id}`, {observe: 'response'});
   }
   
-  findAll(): Observable<EntityArrayResponseType> {
-    return this.http.get<IRepasseHs[]>(`${this.resourceUrl}/findAllHs`, {observe: 'response'});
+  // findAll(): Observable<EntityArrayResponseType> {
+  //   return this.http.get<IRepasseHs[]>(`${this.resourceUrl}/findAllHs`, {observe: 'response'});
+  // }
+
+  findAll(page: number = 0, size: number = 10) {
+    return this.http.get<IRepasseHs[]>(`${this.resourceUrl}/findAllHs?page=${page}&size=${size}`, { observe: 'response' }
+    );
   }
 
   update(repasse: IRepasseHs): Observable<EntityResponseType> {

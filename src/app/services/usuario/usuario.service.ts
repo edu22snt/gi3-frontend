@@ -29,8 +29,13 @@ export class UsuarioService {
     return this.http.get<IUsuario>(`${this.resourceUrl}/findById/${id}`, {observe: 'response'});
   }
   
-  findAll(): Observable<EntityArrayResponseType> {
-    return this.http.get<IUsuario[]>(`${this.resourceUrl}/findAll`, {observe: 'response'});
+  // findAll(): Observable<EntityArrayResponseType> {
+  //   return this.http.get<IUsuario[]>(`${this.resourceUrl}/findAll`, {observe: 'response'});
+  // }
+
+  findAll(page: number = 0, size: number = 10) {
+    return this.http.get<IUsuario[]>(`${this.resourceUrl}/findAll?page=${page}&size=${size}`, { observe: 'response' }
+    );
   }
 
   update(repasse: IUsuario): Observable<EntityResponseType> {

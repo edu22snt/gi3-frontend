@@ -1,0 +1,18 @@
+<h2 mat-dialog-title class="dialog-title">
+  Confirmação
+</h2>
+
+<mat-dialog-content class="dialog-content">
+  <p>Tem certeza que deseja excluir este registro?</p>
+  <small>Essa ação não poderá ser desfeita.</small>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end" class="dialog-actions">
+  <button mat-stroked-button (click)="onCancel()">
+    Cancelar
+  </button>
+
+  <button mat-raised-button color="warn" (click)="onConfirm()">
+    Excluir
+  </button>
+</mat-dialog-actions>
