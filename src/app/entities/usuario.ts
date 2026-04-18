@@ -1,8 +1,10 @@
+import { Role } from "./role";
+
 export interface IUsuario {
     id: number;
     username: string;
     password: string;
-    roles: string;
+    roles: Role;
 }
 
 export class Usuario implements IUsuario {
@@ -10,7 +12,7 @@ export class Usuario implements IUsuario {
         public id: number,
         public username: string,
         public password: string,
-        public roles: string,
+        public roles: Role,
     ) {}
 }
 

@@ -76,13 +76,13 @@ export class RepasseHsComponent implements OnInit {
     this.totalElements = data.totalElements;
   }
 
-  onPageChange(event: PageEvent) {
+  onPageChange(event: PageEvent): void {
     this.pageIndex = event.pageIndex;
     this.pageSize = event.pageSize;
     this.loadData();
   }
 
-  confirmDelete(id: number) {
+  confirmDelete(id: number): void {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '400px'
     });
@@ -94,7 +94,7 @@ export class RepasseHsComponent implements OnInit {
     });
   }
 
-  delete(id: number) {
+  delete(id: number): void {
     this.service.delete(id).subscribe({
       next: () => {
         this.loadData();
