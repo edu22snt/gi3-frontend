@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
   selector: 'app-main-layout',
@@ -20,5 +21,15 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrl: './main-layout.component.scss'
 })
 export class MainLayoutComponent {
+
+    constructor(
+      private auth: AuthService,
+      private router: Router
+    ) {}
+
+  logout() {
+    this.auth.logout();
+    this.router.navigate(['/login']);
+  }
 
 }
