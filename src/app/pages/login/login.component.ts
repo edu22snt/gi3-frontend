@@ -26,6 +26,8 @@ export class LoginComponent {
 
   username = '';
   password = '';
+  loading = false;
+  error = false;
 
   constructor(
     private auth: AuthService,
@@ -36,10 +38,12 @@ export class LoginComponent {
     this.auth.login(this.username, this.password).subscribe({
       next: () => {
         this.router.navigate(['/']);
+        this.loading = true;
       },
       error: (err) => {
         console.error('Login failed', err);
-        alert('Login failed. Please check your credentials and try again.');
+        this.error = true;
+        // alert('Falha no login. Verifique suas credenciais e tente novamente.');
       }
     });
   }

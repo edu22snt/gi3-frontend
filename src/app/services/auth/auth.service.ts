@@ -14,17 +14,17 @@ export class AuthService {
   login ( username: string, password: string ) {
     return this.http.post<any>(`${this.api}/api/authenticate`, { username, password }).pipe(
       tap(response => {
-        this.saveToken(response.token);
+        this.saveToken(response.jwt);
       })
     );
   }
 
-  saveToken(token: string) {
-    localStorage.setItem('token', token);
+  saveToken(jwt: string) {
+    localStorage.setItem('jwt', jwt);
   }
 
   getToken(): string | null {
-    return localStorage.getItem('token');
+    return localStorage.getItem('jwt');
   }
 
   isLogged(): boolean {
@@ -32,6 +32,6 @@ export class AuthService {
   }
 
   logout() {
-    localStorage.removeItem('token');
+    localStorage.removeItem('jwt');
   }
 }

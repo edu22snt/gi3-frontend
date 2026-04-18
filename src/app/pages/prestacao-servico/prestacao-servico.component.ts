@@ -13,18 +13,34 @@ import { MatTableModule } from '@angular/material/table';
 })
 export class PrestacaoServicoComponent implements OnInit {
 
-  dataSource: IPrestacaoServico[] | null = [];
+  displayedColumns: string[] = [
+    'id',
+    'vendedor',
+    'contrato',
+    'parcela',
+    'valor',
+    'empresa'
+  ];
+
+  dataSource: IPrestacaoServico[] = [];
 
   constructor(
     private service: PrestacaoServicoService
   ) { }
 
   ngOnInit(): void {
-    this.service.findAll().subscribe( (res: HttpResponse<IPrestacaoServico[]>) => {
-      console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ", res.body);
-      this.dataSource = res.body;
+    this.service.findAll().subscribe({
+      next: (res: HttpResponse<IPrestacaoServico[]>) => {
+        this.onSuccess(res.body);
+      },
+      error: (err) => {
+        console.error('Erro ao carregar dados', err);
+      }
     });
+  }
 
+  protected onSuccess(data: any): void {
+    this.dataSource = data.content ?? [];
   }
 
 }
