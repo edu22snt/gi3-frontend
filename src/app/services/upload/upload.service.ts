@@ -16,24 +16,24 @@ export class UploadService {
     this.resourceUrl = this.applicationConfigService.getEndpointFor('http://localhost:8080/api/upload');
   }
 
-  uploadBancorbras(file: File){
+  uploadBancorbras(file: File) {
     const formData = new FormData();
     formData.append('file', file);
 
-    return this.http.post(this.resourceUrl + '/bancorbras', formData);
+    return this.http.post(this.resourceUrl + '/bancorbras', formData, { responseType: 'text' });
   }
 
-  uploadHs(file: File){
+  uploadHs(file: File) {
     const formData = new FormData();
     formData.append('file', file);
 
-    return this.http.post(this.resourceUrl + '/hs', formData);
+    return this.http.post(this.resourceUrl + '/hs', formData, { responseType: 'text' });
   }
 
-  uploadPrestacaoServico(file: File){
+  uploadPrestacaoServico(file: File) {
     const formData = new FormData();
     formData.append('file', file);
 
-    return this.http.post(this.resourceUrl + '/prestacaoServico', formData);
+    return this.http.post(this.resourceUrl + '/prestacaoServico', formData, { responseType: 'text' });
   }
 }

@@ -60,6 +60,8 @@ export class UploadComponent {
     if (!this.selectedFile || !this.tipoPlanilha) return;
     this.loading = true;
 
+    console.log("Tipo de planilha selecionada:", this.tipoPlanilha);
+
     if (this.tipoPlanilha === 'BANCORBRAS') {
       this.uploadBancorbras();
     } else if (this.tipoPlanilha === 'HS') {
@@ -71,9 +73,9 @@ export class UploadComponent {
 
   uploadBancorbras(): void {
     this.service.uploadBancorbras(this.selectedFile).subscribe({
-      next: () => {
+      next: (res: string) => {
         this.loading = false;
-        this.snackBar.open('Informações Bancorbrás importadas com sucesso', 'Fechar', { duration: 3000 });
+        this.snackBar.open(res, 'Fechar', { duration: 3000 });
         this.reset();
       },
       error: () => {
@@ -84,24 +86,27 @@ export class UploadComponent {
   }
 
   uploadHs(): void {
-    this.service.uploadBancorbras(this.selectedFile).subscribe({
-      next: () => {
+    this.service.uploadHs(this.selectedFile).subscribe({
+      next: (res: string) => {
         this.loading = false;
-        this.snackBar.open('Informações HS importadas com sucesso', 'Fechar', { duration: 3000 });
+        this.snackBar.open(res, 'Fechar', { duration: 3000});
         this.reset();
       },
-      error: () => {
+      error: (err) => {
         this.loading = false;
-        this.snackBar.open('Erro ao importar as informações HS', 'Fechar', { duration: 3000 });
+        console.error(err);
+        this.snackBar.open('Erro ao importar as informações HS', 'Fechar', {
+          duration: 3000
+        });
       }
     });
   }
 
   uploadPrestacaoServico(): void {
-    this.service.uploadBancorbras(this.selectedFile).subscribe({
-      next: () => {
+    this.service.uploadPrestacaoServico(this.selectedFile).subscribe({
+      next: (res: string) => {
         this.loading = false;
-        this.snackBar.open('Informações de prestação de serviço importadas com sucesso', 'Fechar', { duration: 3000 });
+        this.snackBar.open(res, 'Fechar', { duration: 3000 });
         this.reset();
       },
       error: () => {
