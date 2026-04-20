@@ -1,3 +1,4 @@
+import { CurrencyPipe, DatePipe } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
@@ -19,7 +20,9 @@ import { ConfirmDialogComponent } from '../../shared/confirm-dialog/confirm-dial
     MatIconModule,
     MatButtonModule,
     MatDialogModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    CurrencyPipe,
+    DatePipe
   ],
   templateUrl: './repasse-hs.component.html',
   styleUrl: './repasse-hs.component.scss'

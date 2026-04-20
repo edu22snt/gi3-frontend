@@ -18,18 +18,56 @@
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>Parcela</mat-label>
-          <input matInput formControlName="parcela" />
+          <mat-label>Empresa</mat-label>
+          <mat-select formControlName="empresa">
+            <mat-option value="Bancorbras">Bancorbras</mat-option>
+            <mat-option value="HS">HS</mat-option>
+          </mat-select>
         </mat-form-field>
+
+        @if (form.get('empresa')?.value === 'Bancorbras') {
+          <mat-form-field appearance="outline">
+            <mat-label>Parcela</mat-label>
+            <mat-select formControlName="parcela">
+              <mat-option value="parcela 1">parcela 1</mat-option>
+              <mat-option value="parcela 2">parcela 2</mat-option>
+              <mat-option value="parcela 3">parcela 3</mat-option>
+              <mat-option value="parcela 4">parcela 4</mat-option>
+              <mat-option value="parcela 5">parcela 5</mat-option>
+              <mat-option value="parcela 6">parcela 6</mat-option>
+              <mat-option value="parcela 7">parcela 7</mat-option>
+              <mat-option value="parcela 8">parcela 8</mat-option>
+              <mat-option value="parcela 9">parcela 9</mat-option>
+              <mat-option value="parcela 10">parcela 10</mat-option>
+              <mat-option value="parcela 11">parcela 11</mat-option>
+              <mat-option value="parcela 12">parcela 12</mat-option>
+            </mat-select>
+          </mat-form-field>
+        }
+
+        @if (form.get('empresa')?.value === 'HS') {
+          <mat-form-field appearance="outline">
+            <mat-label>Parcela</mat-label>
+            <mat-select formControlName="parcela">
+              <mat-option value="parcela 1">parcela 1</mat-option>
+              <mat-option value="parcela 2">parcela 2</mat-option>
+              <mat-option value="parcela 3">parcela 3</mat-option>
+              <mat-option value="parcela 4">parcela 4</mat-option>
+              <mat-option value="parcela 5">parcela 5</mat-option>
+              <mat-option value="parcela 6">parcela 6</mat-option>
+            </mat-select>
+          </mat-form-field>
+        }
 
         <mat-form-field appearance="outline">
           <mat-label>Valor</mat-label>
-          <input matInput formControlName="valor" />
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-          <mat-label>Empresa</mat-label>
-          <input matInput formControlName="empresa" />
+          <input
+            class="valor"
+            matInput
+            currencyMask
+            formControlName="valor"
+            [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', precision: 2 }"
+          />
         </mat-form-field>
 
       </div>
@@ -37,10 +75,17 @@
     </mat-card-content>
 
     <mat-card-actions align="end">
-      <button mat-stroked-button type="button" (click)="cancelar()">Cancelar</button>
-      <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
-        Salvar
-      </button>
+      <button mat-stroked-button type="button" (click)="voltar()">Voltar</button>
+      @if (!isViewMode) {
+        <button mat-raised-button color="primary" (click)="salvar()" [disabled]="form.invalid">
+          Salvar
+        </button>
+      }
+      @if (isViewMode) {
+        <button mat-raised-button color="primary" (click)="update()" [disabled]="form.invalid">
+          Atualizar
+        </button>
+      }
     </mat-card-actions>
 
   </mat-card>

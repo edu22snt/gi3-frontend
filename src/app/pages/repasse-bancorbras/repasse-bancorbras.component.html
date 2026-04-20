@@ -23,13 +23,13 @@
   <!-- Venda -->
   <ng-container matColumnDef="venda">
     <th mat-header-cell *matHeaderCellDef> venda </th>
-    <td mat-cell *matCellDef="let element"> {{ element.venda }} </td>
+    <td mat-cell *matCellDef="let element"> {{ element.venda | date:'dd/MM/yyyy'}} </td>
   </ng-container>
 
   <!-- Mês -->
   <ng-container matColumnDef="mes">
     <th mat-header-cell *matHeaderCellDef> Mês </th>
-    <td mat-cell *matCellDef="let element"> {{ element.mes }} </td>
+    <td mat-cell *matCellDef="let element"> {{ element.mes | date:'dd/MM/yyyy'}} </td>
   </ng-container>
 
   <!-- Bem -->
@@ -47,31 +47,31 @@
   <!-- Valor Base -->
   <ng-container matColumnDef="valorBase">
     <th mat-header-cell *matHeaderCellDef> Valor Base </th>
-    <td mat-cell *matCellDef="let element"> {{ element.valorBase }} </td>
+    <td mat-cell *matCellDef="let element"> {{ element.valorBase | currency:'BRL' }} </td>
   </ng-container>
 
   <!-- Comissão Gi3 -->
   <ng-container matColumnDef="comissaoGi3">
     <th mat-header-cell *matHeaderCellDef> Comissão Gi3 </th>
-    <td mat-cell *matCellDef="let element"> {{ element.comissaoGi3 }} </td>
+    <td mat-cell *matCellDef="let element"> {{ element.comissaoGi3 | currency:'BRL' }} </td>
   </ng-container>
 
   <!-- Comissão Vendedor -->
   <ng-container matColumnDef="comissaoVendedor">
     <th mat-header-cell *matHeaderCellDef> Comissão Vendedor </th>
-    <td mat-cell *matCellDef="let element"> {{ element.comissaoVendedor }} </td>
+    <td mat-cell *matCellDef="let element"> {{ element.comissaoVendedor | currency:'BRL' }} </td>
   </ng-container>
 
   <!-- Desconto Comissão -->
   <ng-container matColumnDef="descontoComissao">
     <th mat-header-cell *matHeaderCellDef> Desconto Comissão </th>
-    <td mat-cell *matCellDef="let element"> {{ element.descontoComissao }} </td>
+    <td mat-cell *matCellDef="let element"> {{ element.descontoComissao | currency:'BRL' }} </td>
   </ng-container>
 
   <!-- Comissão Líquida -->
   <ng-container matColumnDef="comissaoLiquida">
     <th mat-header-cell *matHeaderCellDef> Comissão Líquida </th>
-    <td mat-cell *matCellDef="let element"> {{ element.comissaoLiquida }} </td>
+    <td mat-cell *matCellDef="let element"> {{ element.comissaoLiquida | currency:'BRL' }} </td>
   </ng-container>
 
   <!-- PG -->

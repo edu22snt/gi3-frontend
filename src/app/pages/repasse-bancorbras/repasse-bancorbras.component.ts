@@ -9,6 +9,7 @@ import { IRepasseBancorbras } from '../../entities/repasse-bancorbras';
 import { RepasseBancorbrasService } from '../../services/repasse-bancorbras/repasse-bancorbras.service';
 import { HttpResponse } from '@angular/common/http';
 import { ConfirmDialogComponent } from '../../shared/confirm-dialog/confirm-dialog.component';
+import { CurrencyPipe, DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-repasse-bancorbras',
@@ -19,7 +20,9 @@ import { ConfirmDialogComponent } from '../../shared/confirm-dialog/confirm-dial
     MatIconModule,
     MatButtonModule,
     MatDialogModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    CurrencyPipe,
+    DatePipe
   ],
   templateUrl: './repasse-bancorbras.component.html',
   styleUrl: './repasse-bancorbras.component.scss'

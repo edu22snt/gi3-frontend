@@ -20,3 +20,14 @@ td {
   background: #d32f2f;
   color: white;
 }
+
+.snackbar-success {
+  background: #4caf50;
+  color: white;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

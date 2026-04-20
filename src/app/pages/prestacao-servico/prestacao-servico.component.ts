@@ -9,7 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from '../../shared/confirm-dialog/confirm-dialog.component';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-prestacao-servico',
@@ -20,8 +20,9 @@ import { Router } from '@angular/router';
     MatIconModule,
     MatButtonModule,
     MatDialogModule,
-    MatSnackBarModule
-  ],
+    MatSnackBarModule,
+    RouterLink
+],
   templateUrl: './prestacao-servico.component.html',
   styleUrl: './prestacao-servico.component.scss'
 })
@@ -111,16 +112,15 @@ export class PrestacaoServicoComponent implements OnInit {
   }
 
   view(id: number):void {
-    // Implementar lógica para visualizar detalhes do serviço
+    this.router.navigate(['/prestacao-servico-form']);
   }
 
   edit(id: number):void {
-    // Implementar lógica para visualizar detalhes do serviço
+    this.router.navigate(['/prestacao-servico-form']);
   }
 
   new(): void {
-    // this.router.navigate(['/prestacao-servico-form']);
-    this.router.navigate(['/upload']);
+    this.router.navigate(['/prestacao-servico-form']);
   }
 
 }

@@ -34,6 +34,18 @@ export const routes: Routes = [
             .then(m => m.PrestacaoServicoFormComponent)
       },
       {
+        path: 'prestacao-servico/view/:id',
+        loadComponent: () =>
+          import('./pages/prestacao-servico/form/prestacao-servico-form.component')
+            .then(m => m.PrestacaoServicoFormComponent)
+      },
+      {
+        path: 'prestacao-servico/edit/:id',
+        loadComponent: () =>
+          import('./pages/prestacao-servico/form/prestacao-servico-form.component')
+            .then(m => m.PrestacaoServicoFormComponent)
+      },
+      {
         path: 'repasse-bancorbras',
         loadComponent: () =>
           import('./pages/repasse-bancorbras/repasse-bancorbras.component')

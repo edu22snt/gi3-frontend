@@ -36,9 +36,7 @@ export class PrestacaoServicoService {
 
   update(prestacao: IPrestacaoServico): Observable<EntityResponseType> {
     return this.http.put<IPrestacaoServico>(
-      `${this.resourceUrl}/update/${prestacao}`,
-      prestacao,
-      {observe: 'response'}
+      `${this.resourceUrl}/update`, prestacao, {observe: 'response'}
     );
   }
 
