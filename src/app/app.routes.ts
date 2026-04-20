@@ -82,6 +82,18 @@ export const routes: Routes = [
             .then(m => m.RepasseHsFormComponent)
       },
       {
+        path: 'repasse-hs-form/view/:id',
+        loadComponent: () =>
+          import('./pages/repasse-hs/form/repasse-hs-form.component')
+            .then(m => m.RepasseHsFormComponent)
+      },
+      {
+        path: 'repasse-hs-form/edit/:id',
+        loadComponent: () =>
+          import('./pages/repasse-hs/form/repasse-hs-form.component')
+            .then(m => m.RepasseHsFormComponent)
+      },
+      {
         path: 'usuario',
         loadComponent: () =>
           import('./pages/usuario/usuario.component')
