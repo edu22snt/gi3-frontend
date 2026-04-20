@@ -34,6 +34,10 @@ export class RepasseHsService {
     );
   }
 
+  searchByKeyword(param: string, page: number = 0, size: number = 10): Observable<EntityArrayResponseType> {
+    return this.http.get<IRepasseHs[]>(`${this.resourceUrl}/searchByKeywordHs?param=${encodeURIComponent(param)}&page=${page}&size=${size}`, { observe: 'response' });
+  }
+
   update(repasse: IRepasseHs): Observable<EntityResponseType> {
     return this.http.put<IRepasseHs>(
       `${this.resourceUrl}/updateHs/${repasse}`,
