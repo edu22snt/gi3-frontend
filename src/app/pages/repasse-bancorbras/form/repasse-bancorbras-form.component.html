@@ -130,7 +130,13 @@
             [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', precision: 2 }"
           />
         </mat-form-field>
-
+        <mat-form-field appearance="outline">
+            <mat-label>Pagamento</mat-label>
+            <mat-select formControlName="pg">
+                <mat-option value="OK">OK</mat-option>
+                <mat-option value="NO">NO</mat-option>
+            </mat-select>
+        </mat-form-field>
       </div>
 
     </mat-card-content>
