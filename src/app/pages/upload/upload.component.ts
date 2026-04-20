@@ -1,3 +1,4 @@
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { Component } from '@angular/core';
 import { UploadService } from '../../services/upload/upload.service';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
@@ -22,7 +23,8 @@ import { MatSelect, MatOption } from "@angular/material/select";
     MatFormField,
     MatLabel,
     MatSelect,
-    MatOption
+    MatOption,
+    MatProgressSpinnerModule
 ],
   templateUrl: './upload.component.html',
   styleUrl: './upload.component.scss'
