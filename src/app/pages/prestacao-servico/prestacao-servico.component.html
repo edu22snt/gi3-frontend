@@ -10,6 +10,47 @@
   </button>
 </div>
 
+<!-- <div>
+  <mat-label>Procurar</mat-label>
+  <input [(ngModel)]="searchItem" />
+  <button
+    mat-icon-button
+    color="accent"
+    (click)="searchByKeyword()">
+    <mat-icon>search</mat-icon>
+  </button>
+</div> -->
+
+<div class="search-container">
+  <mat-form-field appearance="outline" class="search-field">
+    <mat-label>Procurar</mat-label>
+
+    <input
+      matInput
+      [(ngModel)]="searchItem"
+      (keyup.enter)="searchByKeyword()"
+      placeholder="Digite vendedor, contrato, empresa..."
+    />
+
+    <button
+      mat-icon-button
+      matSuffix
+      color="primary"
+      (click)="searchByKeyword()">
+      <mat-icon>search</mat-icon>
+    </button>
+
+    <button
+      *ngIf="searchItem"
+      mat-icon-button
+      matSuffix
+      (click)="searchItem = ''; searchByKeyword()">
+      <mat-icon>close</mat-icon>
+    </button>
+
+  </mat-form-field>
+</div>
+
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 full-width">
 
   <!-- ID -->

@@ -31,3 +31,17 @@ td {
   justify-content: space-between;
   align-items: center;
 }
+
+.search-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.search-field {
+  width: 350px;
+}
+
+mat-form-field {
+  font-size: 14px;
+}
