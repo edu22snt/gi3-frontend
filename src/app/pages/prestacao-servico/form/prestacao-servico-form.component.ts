@@ -40,6 +40,7 @@ export class PrestacaoServicoFormComponent implements OnInit {
 
   form: FormGroup;
   isViewMode = false;
+  isEditMode = false;
 
     constructor(
       private fb: FormBuilder,
@@ -62,6 +63,7 @@ export class PrestacaoServicoFormComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     const url = this.route.snapshot.routeConfig?.path;
     this.isViewMode = url?.includes('view') || false;
+    this.isEditMode = url?.includes('edit') || false;
 
     if (id) {
       this.loadById(+id);

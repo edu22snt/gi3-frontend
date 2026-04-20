@@ -58,6 +58,18 @@ export const routes: Routes = [
             .then(m => m.RepasseBancorbrasFormComponent)
       },
       {
+        path: 'repasse-bancorbras-form/view/:id',
+        loadComponent: () =>
+          import('./pages/repasse-bancorbras/form/repasse-bancorbras-form.component')
+            .then(m => m.RepasseBancorbrasFormComponent)
+      },
+      {
+        path: 'repasse-bancorbras-form/edit/:id',
+        loadComponent: () =>
+          import('./pages/repasse-bancorbras/form/repasse-bancorbras-form.component')
+            .then(m => m.RepasseBancorbrasFormComponent)
+      },
+      {
         path: 'repasse-hs',
         loadComponent: () =>
           import('./pages/repasse-hs/repasse-hs.component')

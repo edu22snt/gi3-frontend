@@ -10,6 +10,10 @@ import { RepasseBancorbrasService } from '../../services/repasse-bancorbras/repa
 import { HttpResponse } from '@angular/common/http';
 import { ConfirmDialogComponent } from '../../shared/confirm-dialog/confirm-dialog.component';
 import { CurrencyPipe, DatePipe } from '@angular/common';
+import { MatFormField, MatLabel } from "@angular/material/form-field";
+import { Router, RouterLink } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-repasse-bancorbras',
@@ -22,8 +26,13 @@ import { CurrencyPipe, DatePipe } from '@angular/common';
     MatDialogModule,
     MatSnackBarModule,
     CurrencyPipe,
-    DatePipe
-  ],
+    DatePipe,
+    MatFormField,
+    MatLabel,
+    FormsModule,
+    MatInputModule,
+    RouterLink
+],
   templateUrl: './repasse-bancorbras.component.html',
   styleUrl: './repasse-bancorbras.component.scss'
 })
@@ -51,13 +60,15 @@ export class RepasseBancorbrasComponent implements OnInit {
   totalElements = 0;
   pageSize = 10;
   pageIndex = 0;
+  searchItem = '';
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(
     private service: RepasseBancorbrasService,
     private dialog: MatDialog,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private router: Router
 
   ) { }
 
@@ -76,9 +87,27 @@ export class RepasseBancorbrasComponent implements OnInit {
     });
   }
 
+  searchByKeyword(): void {
+    this.pageIndex = 0;
+    console.log('Parâmetro de busca:', this.searchItem);
+    this.service.searchByKeyword(this.searchItem, this.pageIndex, this.pageSize).subscribe({
+      next: (res: HttpResponse<IRepasseBancorbras[]>) => {
+        this.onSuccess(res.body);
+      },
+      error: (erro) => {
+        console.error('Erro ao carregar dados', erro);
+      }
+    });
+  }
+
+  private clearList(): void {
+    this.dataSource.data = [];
+  }
+
   protected onSuccess(data: any): void {
-    this.dataSource.data = data.content;
-    this.totalElements = data.totalElements;
+    this.clearList();
+    this.dataSource.data = [...(data?.content || [])];
+    this.totalElements = data?.totalElements || 0;
   }
 
   onPageChange(event: PageEvent): void {
@@ -118,11 +147,7 @@ export class RepasseBancorbrasComponent implements OnInit {
     });
   }
 
-  view(id: number):void {
-    // Implementar lógica para visualizar detalhes do serviço
-  }
-
-  edit(id: number):void {
-    // Implementar lógica para visualizar detalhes do serviço
+  new(): void {
+    this.router.navigate(['/repasse-bancorbras-form']);
   }
 }

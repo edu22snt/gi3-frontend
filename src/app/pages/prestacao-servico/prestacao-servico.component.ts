@@ -49,7 +49,7 @@ export class PrestacaoServicoComponent implements OnInit {
   totalElements = 0;
   pageSize = 10;
   pageIndex = 0;
-  searchItem = '';  
+  searchItem = '';
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 

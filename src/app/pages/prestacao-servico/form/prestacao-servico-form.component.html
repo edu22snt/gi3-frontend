@@ -76,12 +76,12 @@
 
     <mat-card-actions align="end">
       <button mat-stroked-button type="button" (click)="voltar()">Voltar</button>
-      @if (!isViewMode) {
+      @if (!isViewMode && !isEditMode) {
         <button mat-raised-button color="primary" (click)="salvar()" [disabled]="form.invalid">
           Salvar
         </button>
       }
-      @if (isViewMode) {
+      @if (!isViewMode && isEditMode) {
         <button mat-raised-button color="primary" (click)="update()" [disabled]="form.invalid">
           Atualizar
         </button>
