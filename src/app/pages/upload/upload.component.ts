@@ -61,9 +61,6 @@ export class UploadComponent {
   upload() {
     if (!this.selectedFile || !this.tipoPlanilha) return;
     this.loading = true;
-
-    console.log("Tipo de planilha selecionada:", this.tipoPlanilha);
-
     if (this.tipoPlanilha === 'BANCORBRAS') {
       this.uploadBancorbras();
     } else if (this.tipoPlanilha === 'HS') {
@@ -90,6 +87,7 @@ export class UploadComponent {
   uploadHs(): void {
     this.service.uploadHs(this.selectedFile).subscribe({
       next: (res: string) => {
+        console.log("Resposta do upload HS:", res);
         this.loading = false;
         this.snackBar.open(res, 'Fechar', { duration: 3000});
         this.reset();

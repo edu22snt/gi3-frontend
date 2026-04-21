@@ -130,7 +130,8 @@ export class RepasseBancorbrasComponent implements OnInit {
 
   delete(id: number): void {
     this.service.delete(id).subscribe({
-      next: () => {
+      next: (res) => {
+        console.log('Resposta da exclusão:', res);
         this.loadData();
         this.snackBar.open('Excluído com sucesso', 'Fechar', {
           duration: 3000,
@@ -138,7 +139,8 @@ export class RepasseBancorbrasComponent implements OnInit {
           verticalPosition: 'top'
         });
       },
-      error: () => {
+      error: (err) => {
+        console.error('Erro ao excluir:', err);
         this.snackBar.open('Erro ao excluir', 'Fechar', {
           duration: 3000,
           panelClass: ['snackbar-error']
