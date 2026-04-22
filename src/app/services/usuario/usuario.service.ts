@@ -39,11 +39,7 @@ export class UsuarioService {
   }
 
   update(repasse: IUsuario): Observable<EntityResponseType> {
-    return this.http.put<IUsuario>(
-      `${this.resourceUrl}/update/${repasse}`,
-      repasse,
-      {observe: 'response'}
-    );
+    return this.http.put<IUsuario>(`${this.resourceUrl}/update`,repasse,{observe: 'response'});
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
