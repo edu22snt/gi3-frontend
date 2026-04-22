@@ -6,7 +6,6 @@
 
     <div class="upload-container">
 
-      <!-- SELECT -->
       <mat-form-field appearance="outline">
         <mat-label>Tipo da Planilha</mat-label>
         <mat-select [(value)]="tipoPlanilha">
@@ -16,7 +15,6 @@
         </mat-select>
       </mat-form-field>
 
-      <!-- BOTÃO DE ARQUIVO -->
       <button mat-stroked-button color="primary" (click)="fileInput.click()">
         Selecionar arquivo
       </button>
@@ -30,7 +28,7 @@
       />
 
       <div class="file-info" *ngIf="fileName">
-        📄 {{ fileName }}
+        {{ fileName }}
       </div>
 
       <div class="error" *ngIf="errorMessage">

@@ -84,7 +84,11 @@ export class UsuarioFormComponent implements OnInit {
     if (this.form.valid) {
       const usuario: IUsuario = this.form.value;
       if(usuario.roles.length > 1) {
-
+        this.snackBar.open('Selecione apenas um tipo de usuário.', 'Fechar', {
+          duration: 3000,
+          panelClass: ['snackbar-error']
+        });
+        return;
       }
       this.service.create(usuario).subscribe({
         next: () => {
