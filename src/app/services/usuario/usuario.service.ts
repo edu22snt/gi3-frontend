@@ -28,14 +28,14 @@ export class UsuarioService {
   find(id: number): Observable<EntityResponseType> {
     return this.http.get<IUsuario>(`${this.resourceUrl}/findById/${id}`, {observe: 'response'});
   }
-  
-  // findAll(): Observable<EntityArrayResponseType> {
-  //   return this.http.get<IUsuario[]>(`${this.resourceUrl}/findAll`, {observe: 'response'});
-  // }
 
   findAll(page: number = 0, size: number = 10) {
     return this.http.get<IUsuario[]>(`${this.resourceUrl}/findAll?page=${page}&size=${size}`, { observe: 'response' }
     );
+  }
+
+  searchByKeyword(param: string, page: number = 0, size: number = 10): Observable<EntityArrayResponseType> {
+    return this.http.get<IUsuario[]>(`${this.resourceUrl}/searchByKeyword?param=${encodeURIComponent(param)}&page=${page}&size=${size}`, { observe: 'response' });
   }
 
   update(repasse: IUsuario): Observable<EntityResponseType> {

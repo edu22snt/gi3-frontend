@@ -106,6 +106,18 @@ export const routes: Routes = [
             .then(m => m.UsuarioFormComponent)
       },
       {
+        path: 'usuario-form/view/:id',
+        loadComponent: () =>
+          import('./pages/usuario/form/usuario-form.component')
+            .then(m => m.UsuarioFormComponent)
+      },
+      {
+        path: 'usuario-form/edit/:id',
+        loadComponent: () =>
+          import('./pages/usuario/form/usuario-form.component')
+            .then(m => m.UsuarioFormComponent)
+      },
+      {
         path: 'upload',
         loadComponent: () =>
           import('./pages/upload/upload.component')

@@ -10,6 +10,10 @@ import { UsuarioService } from '../../services/usuario/usuario.service';
 import { HttpResponse } from '@angular/common/http';
 import { ConfirmDialogComponent } from '../../shared/confirm-dialog/confirm-dialog.component';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatFormField, MatFormFieldModule, MatLabel } from "@angular/material/form-field";
+import { FormsModule } from '@angular/forms';
+import { Router, RouterLink } from '@angular/router';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-usuario',
@@ -21,8 +25,14 @@ import { MatChipsModule } from '@angular/material/chips';
     MatButtonModule,
     MatDialogModule,
     MatSnackBarModule,
-    MatChipsModule
-  ],
+    MatChipsModule,
+    MatFormField,
+    MatLabel,
+    FormsModule,
+    RouterLink,
+    MatFormFieldModule,
+    MatInputModule
+],
   templateUrl: './usuario.component.html',
   styleUrl: './usuario.component.scss'
 })
@@ -40,13 +50,15 @@ export class UsuarioComponent implements OnInit {
   totalElements = 0;
   pageSize = 10;
   pageIndex = 0;
+  searchItem = '';
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(
     private service: UsuarioService,
     private dialog: MatDialog,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private router: Router
 
   ) { }
 
@@ -65,7 +77,21 @@ export class UsuarioComponent implements OnInit {
     });
   }
 
+  searchByKeyword(): void {
+    this.pageIndex = 0;
+    console.log('Parâmetro de busca:', this.searchItem);
+    this.service.searchByKeyword(this.searchItem, this.pageIndex, this.pageSize).subscribe({
+      next: (res: HttpResponse<IUsuario[]>) => {
+        this.onSuccess(res.body);
+      },
+      error: (erro) => {
+        console.error('Erro ao carregar dados', erro);
+      }
+    });
+  }
+
   protected onSuccess(data: any): void {
+    console.log('Dados recebidos:', data);
     this.dataSource.data = data.content;
     this.totalElements = data.totalElements;
   }
@@ -119,12 +145,8 @@ export class UsuarioComponent implements OnInit {
     });
   }
 
-  view(id: number):void {
-    // Implementar lógica para visualizar detalhes do serviço
-  }
-
-  edit(id: number):void {
-    // Implementar lógica para visualizar detalhes do serviço
+  new(): void {
+    this.router.navigate(['/usuario-form']);
   }
 
 }

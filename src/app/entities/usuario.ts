@@ -4,7 +4,7 @@ export interface IUsuario {
     id: number;
     username: string;
     password: string;
-    roles: Role;
+    roles: string[];
 }
 
 export class Usuario implements IUsuario {
@@ -12,7 +12,7 @@ export class Usuario implements IUsuario {
         public id: number,
         public username: string,
         public password: string,
-        public roles: Role,
+        public roles: string[],
     ) {}
 }
 
