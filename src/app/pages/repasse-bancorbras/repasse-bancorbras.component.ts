@@ -15,6 +15,7 @@ import { MatFormField, MatLabel } from "@angular/material/form-field";
 import { Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
+import { RelatorioService } from '../../services/relatorio/relatorio.service';
 
 @Component({
   selector: 'app-repasse-bancorbras',
@@ -41,7 +42,6 @@ import { MatInputModule } from '@angular/material/input';
 export class RepasseBancorbrasComponent implements OnInit {
 
   displayedColumns: string[] = [
-    'id',
     'cliente',
     'contrato',
     'venda',
@@ -64,7 +64,7 @@ export class RepasseBancorbrasComponent implements OnInit {
   pageIndex = 0;
   searchItem = '';
   totalComissaoGi3 = 0;
-  totalComissaoVendedor = 0
+  totalComissaoLiquida = 0
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -72,7 +72,8 @@ export class RepasseBancorbrasComponent implements OnInit {
     private service: RepasseBancorbrasService,
     private dialog: MatDialog,
     private snackBar: MatSnackBar,
-    private router: Router
+    private router: Router,
+    private relatorioService: RelatorioService
 
   ) { }
 
@@ -116,7 +117,7 @@ export class RepasseBancorbrasComponent implements OnInit {
 
   calcularComissoes(): void {
     this.totalComissaoGi3 = this.dataSource.data.reduce((total, item) => total + parseFloat(item.comissaoGi3), 0);
-    this.totalComissaoVendedor = this.dataSource.data.reduce((total, item) => total + parseFloat(item.comissaoLiquida), 0);
+    this.totalComissaoLiquida = this.dataSource.data.reduce((total, item) => total + parseFloat(item.comissaoLiquida), 0);
   }
 
   onPageChange(event: PageEvent): void {
@@ -161,4 +162,9 @@ export class RepasseBancorbrasComponent implements OnInit {
   new(): void {
     this.router.navigate(['/repasse-bancorbras-form']);
   }
+
+  imprimir(): void {
+    this.relatorioService.relatorioBancorbras(this.searchItem);
+  }
+
 }
