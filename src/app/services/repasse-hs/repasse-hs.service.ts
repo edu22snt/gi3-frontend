@@ -39,11 +39,7 @@ export class RepasseHsService {
   }
 
   update(repasse: IRepasseHs): Observable<EntityResponseType> {
-    return this.http.put<IRepasseHs>(
-      `${this.resourceUrl}/updateHs/${repasse}`,
-      repasse,
-      {observe: 'response'}
-    );
+    return this.http.put<IRepasseHs>(`${this.resourceUrl}/updateHs`, repasse, {observe: 'response'});
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {

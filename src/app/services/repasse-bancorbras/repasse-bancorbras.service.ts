@@ -39,11 +39,7 @@ export class RepasseBancorbrasService {
   }
 
   update(repasse: IRepasseBancorbras): Observable<EntityResponseType> {
-    return this.http.put<IRepasseBancorbras>(
-      `${this.resourceUrl}/updateBancorbras/${repasse}`,
-      repasse,
-      {observe: 'response'}
-    );
+    return this.http.put<IRepasseBancorbras>(`${this.resourceUrl}/updateBancorbras`, repasse, {observe: 'response'});
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {
