@@ -1,3 +1,4 @@
+import { NgxCurrencyDirective } from 'ngx-currency';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
@@ -31,7 +32,8 @@ import { MatInputModule } from '@angular/material/input';
     MatLabel,
     FormsModule,
     MatInputModule,
-    RouterLink
+    RouterLink,
+    NgxCurrencyDirective
 ],
   templateUrl: './repasse-bancorbras.component.html',
   styleUrl: './repasse-bancorbras.component.scss'
@@ -61,6 +63,8 @@ export class RepasseBancorbrasComponent implements OnInit {
   pageSize = 10;
   pageIndex = 0;
   searchItem = '';
+  totalComissaoGi3 = 0;
+  totalComissaoVendedor = 0
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -89,7 +93,6 @@ export class RepasseBancorbrasComponent implements OnInit {
 
   searchByKeyword(): void {
     this.pageIndex = 0;
-    console.log('Parâmetro de busca:', this.searchItem);
     this.service.searchByKeyword(this.searchItem, this.pageIndex, this.pageSize).subscribe({
       next: (res: HttpResponse<IRepasseBancorbras[]>) => {
         this.onSuccess(res.body);
@@ -108,6 +111,12 @@ export class RepasseBancorbrasComponent implements OnInit {
     this.clearList();
     this.dataSource.data = [...(data?.content || [])];
     this.totalElements = data?.totalElements || 0;
+    this.calcularComissoes();
+  }
+
+  calcularComissoes(): void {
+    this.totalComissaoGi3 = this.dataSource.data.reduce((total, item) => total + parseFloat(item.comissaoGi3), 0);
+    this.totalComissaoVendedor = this.dataSource.data.reduce((total, item) => total + parseFloat(item.comissaoLiquida), 0);
   }
 
   onPageChange(event: PageEvent): void {

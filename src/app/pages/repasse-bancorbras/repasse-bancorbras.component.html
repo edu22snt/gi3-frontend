@@ -38,6 +38,17 @@
     </button>
 
   </mat-form-field>
+  
+  <mat-form-field appearance="outline">
+    <mat-label>Total Comissão Vendedor</mat-label>
+    <input
+      class="valor"
+      matInput
+      currencyMask
+      [(ngModel)]="totalComissaoVendedor"
+      [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', precision: 2 }"
+    />
+  </mat-form-field>
 </div>
 
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 full-width">
