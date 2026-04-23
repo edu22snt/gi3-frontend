@@ -14,6 +14,7 @@ import { MatFormField, MatLabel } from "@angular/material/form-field";
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { Router, RouterLink } from '@angular/router';
+import { RelatorioService } from '../../services/relatorio/relatorio.service';
 
 @Component({
   selector: 'app-repasse-hs',
@@ -39,7 +40,6 @@ import { Router, RouterLink } from '@angular/router';
 export class RepasseHsComponent implements OnInit {
 
   displayedColumns: string[] = [
-    'id',
     'cliente',
     'contrato',
     'venda',
@@ -66,7 +66,8 @@ export class RepasseHsComponent implements OnInit {
     private service: RepasseHsService,
     private dialog: MatDialog,
     private snackBar: MatSnackBar,
-    private router: Router
+    private router: Router,
+    private relatorioService: RelatorioService
   ) { }
 
   ngOnInit(): void {
@@ -141,6 +142,10 @@ export class RepasseHsComponent implements OnInit {
 
   new(): void {
     this.router.navigate(['/repasse-hs-form']);
+  }
+
+  imprimir(): void {
+    this.relatorioService.relatorioHs(this.searchItem);
   }
 
 }

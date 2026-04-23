@@ -37,4 +37,15 @@ export class RelatorioService {
 
     });
   }
+
+  relatorioHs(param: string): void {
+    this.http.get(`${this.resourceUrl}/hs?param=${param}`, {
+      responseType: 'blob'
+    }).subscribe((blob: Blob) => {
+
+      const url = window.URL.createObjectURL(blob);
+      window.open(url);
+
+    });
+  }
 }

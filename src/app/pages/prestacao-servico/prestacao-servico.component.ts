@@ -13,6 +13,7 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { Router, RouterLink } from '@angular/router';
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from '@angular/material/input';
+import { RelatorioService } from '../../services/relatorio/relatorio.service';
 
 @Component({
   selector: 'app-prestacao-servico',
@@ -35,7 +36,6 @@ import { MatInputModule } from '@angular/material/input';
 export class PrestacaoServicoComponent implements OnInit {
 
   displayedColumns: string[] = [
-    'id',
     'vendedor',
     'contrato',
     'parcela',
@@ -57,7 +57,8 @@ export class PrestacaoServicoComponent implements OnInit {
     private service: PrestacaoServicoService,
     private dialog: MatDialog,
     private snackBar: MatSnackBar,
-    private router: Router
+    private router: Router,
+        private relatorioService: RelatorioService
 
   ) { }
 
@@ -138,6 +139,10 @@ export class PrestacaoServicoComponent implements OnInit {
 
   new(): void {
     this.router.navigate(['/prestacao-servico-form']);
+  }
+  
+  imprimir(): void {
+    this.relatorioService.relatorioPrestacaoServico(this.searchItem);
   }
 
 }
