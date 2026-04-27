@@ -120,7 +120,7 @@ export class ContratoFormComponent implements OnInit {
 
   voltar(): void {
     this.form.reset();
-    this.router.navigate(['/prestacao-servico']);
+    this.router.navigate(['/contrato']);
   }
 
   loadById(id: number): void {

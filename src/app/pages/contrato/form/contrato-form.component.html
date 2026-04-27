@@ -26,6 +26,17 @@
         </mat-form-field>
 
         <mat-form-field appearance="outline">
+          <mat-label>Valor</mat-label>
+          <input
+            class="valor"
+            matInput
+            currencyMask
+            formControlName="valor"
+            [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', precision: 2 }"
+          />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
           <mat-label>Empresa</mat-label>
           <mat-select formControlName="empresa">
             <mat-option value="Bancorbras">Bancorbras</mat-option>
@@ -51,17 +62,6 @@
             </mat-select>
           </mat-form-field>
         }
-
-        <mat-form-field appearance="outline">
-          <mat-label>Valor</mat-label>
-          <input
-            class="valor"
-            matInput
-            currencyMask
-            formControlName="valor"
-            [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', precision: 2 }"
-          />
-        </mat-form-field>
 
       </div>
 
