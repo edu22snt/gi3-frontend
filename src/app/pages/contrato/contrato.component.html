@@ -1,0 +1,100 @@
+<div class="header">
+  <div>
+    <h1>Listar contratos</h1>
+  </div>
+  <button
+    mat-icon-button
+    color="accent"
+    (click)="new()">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
+
+<div class="search-container">
+  <mat-form-field appearance="outline" class="search-field">
+    <mat-label>Procurar</mat-label>
+
+    <input
+      matInput
+      [(ngModel)]="searchItem"
+      (keyup.enter)="searchByKeyword()"
+      placeholder="Digite para pesquisar..."
+    />
+
+    <button
+      mat-icon-button
+      matSuffix
+      color="primary"
+      (click)="searchByKeyword()">
+      <mat-icon>search</mat-icon>
+    </button>
+
+    <button
+      *ngIf="searchItem"
+      mat-icon-button
+      matSuffix
+      (click)="searchItem = ''; searchByKeyword()">
+      <mat-icon>close</mat-icon>
+    </button>
+
+  </mat-form-field>
+  <button
+    class="posicao-print"
+    mat-icon-button
+    color="primary"
+    (click)="imprimir()">
+    <mat-icon>print</mat-icon>
+  </button>
+</div>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8 full-width">
+
+  <ng-container matColumnDef="numeroContrato">
+    <th mat-header-cell *matHeaderCellDef> Número do Contrato </th>
+    <td mat-cell *matCellDef="let element"> {{ element.numeroContrato }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="vendedor">
+    <th mat-header-cell *matHeaderCellDef> Vendedor </th>
+    <td mat-cell *matCellDef="let element"> {{ element.vendedor }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="tipo">
+    <th mat-header-cell *matHeaderCellDef> Tipo </th>
+    <td mat-cell *matCellDef="let element"> {{ element.tipo }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="empresa">
+    <th mat-header-cell *matHeaderCellDef> Empresa </th>
+    <td mat-cell *matCellDef="let element"> {{ element.empresa }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="acoes">
+    <th mat-header-cell *matHeaderCellDef class="acoes-header"> Ações </th>
+    <td mat-cell *matCellDef="let element" class="acoes-cell">
+
+      <button mat-icon-button color="primary" [routerLink]="['/repasse-hs-form/view', element.id]">
+        <mat-icon>visibility</mat-icon>
+      </button>
+
+      <button mat-icon-button color="accent" [routerLink]="['/repasse-hs-form/edit', element.id]">
+        <mat-icon>edit</mat-icon>
+      </button>
+
+      <button mat-icon-button color="warn" (click)="confirmDelete(element.id)">
+        <mat-icon>delete</mat-icon>
+      </button>
+
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<mat-paginator
+  [length]="totalElements"
+  [pageSize]="pageSize"
+  [pageSizeOptions]="[5, 10, 20]"
+  (page)="onPageChange($event)">
+</mat-paginator>

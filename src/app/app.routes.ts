@@ -22,6 +22,30 @@ export const routes: Routes = [
             .then(m => m.DashboardComponent)
       },
       {
+        path: 'contrato',
+        loadComponent: () =>
+          import('./pages/contrato/contrato.component')
+            .then(m => m.ContratoComponent)
+      },
+      {
+        path: 'contrato-form',
+        loadComponent: () =>
+          import('./pages/contrato/form/contrato-form.component')
+            .then(m => m.ContratoFormComponent)
+      },
+      {
+        path: 'contrato/view/:id',
+        loadComponent: () =>
+          import('./pages/contrato/form/contrato-form.component')
+            .then(m => m.ContratoFormComponent)
+      },
+      {
+        path: 'contrato/edit/:id',
+        loadComponent: () =>
+          import('./pages/contrato/form/contrato-form.component')
+            .then(m => m.ContratoFormComponent)
+      },
+      {
         path: 'prestacao-servico',
         loadComponent: () =>
           import('./pages/prestacao-servico/prestacao-servico.component')

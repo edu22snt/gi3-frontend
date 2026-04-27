@@ -1,0 +1,86 @@
+<form [formGroup]="form" class="form-container">
+
+  <mat-card class="title">
+    <mat-card-title>Cadastro de Prestação de Serviço</mat-card-title>
+
+    <mat-card-content>
+
+      <div class="form-grid">
+
+        <mat-form-field appearance="outline">
+          <mat-label>Número do Contrato</mat-label>
+          <input matInput formControlName="numeroContrato" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Vendedor</mat-label>
+          <input matInput formControlName="vendedor" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Tipo do bem</mat-label>
+            <mat-select formControlName="tipo">
+                <mat-option value="imovel">Imóvel</mat-option>
+                <mat-option value="automovel">Automóvel</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Empresa</mat-label>
+          <mat-select formControlName="empresa">
+            <mat-option value="Bancorbras">Bancorbras</mat-option>
+            <mat-option value="HS">HS</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        @if (form.get('empresa')?.value === 'Bancorbras') {
+          <mat-form-field appearance="outline">
+            <mat-label>Quantidade de parcelas</mat-label>
+            <mat-select formControlName="qntParcelas">
+              <mat-option value="13">13 x</mat-option>
+              <mat-option value="24">24 x</mat-option>
+            </mat-select>
+          </mat-form-field>
+        }
+
+        @if (form.get('empresa')?.value === 'HS') {
+          <mat-form-field appearance="outline">
+            <mat-label>Quantidade de parcelas</mat-label>
+            <mat-select formControlName="qntParcelas">
+              <mat-option value="5">5 X</mat-option>
+            </mat-select>
+          </mat-form-field>
+        }
+
+        <mat-form-field appearance="outline">
+          <mat-label>Valor</mat-label>
+          <input
+            class="valor"
+            matInput
+            currencyMask
+            formControlName="valor"
+            [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', precision: 2 }"
+          />
+        </mat-form-field>
+
+      </div>
+
+    </mat-card-content>
+
+    <mat-card-actions align="end">
+      <button mat-stroked-button type="button" (click)="voltar()">Voltar</button>
+      @if (!isViewMode && !isEditMode) {
+        <button mat-raised-button color="primary" (click)="salvar()" [disabled]="form.invalid">
+          Salvar
+        </button>
+      }
+      @if (!isViewMode && isEditMode) {
+        <button mat-raised-button color="primary" (click)="update()" [disabled]="form.invalid">
+          Atualizar
+        </button>
+      }
+    </mat-card-actions>
+
+  </mat-card>
+
+</form>
