@@ -16,7 +16,6 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { IContratoParcela } from '../../../entities/contrato-parcelas';
 import { HttpResponse } from '@angular/common/http';
-// import { ContratoParcelaService } from '../../../services/contrato-parcela/contrato-parcela.service';
 
 @Component({
   selector: 'app-contrato-form',
@@ -56,10 +55,12 @@ export class ContratoFormComponent implements OnInit {
   idContrato: string = "";
 
   displayedColumns: string[] = [
-    'numeroContrato',
     'numeroParcela',
-    'status',
-    'acoes'
+    'porcentagemComissao',
+    'base',
+    'comissao',
+    'liquido',
+    'status'
   ];
 
   totalElements = 0;
@@ -73,7 +74,6 @@ export class ContratoFormComponent implements OnInit {
       private route: ActivatedRoute,
       private snackBar: MatSnackBar,
       private service: ContratoService
-      // private serviceParcela: ContratoParcelaService
     ) {
     this.form = this.fb.group({
       id: [''],
@@ -108,7 +108,6 @@ export class ContratoFormComponent implements OnInit {
       for (let i = 1; i <= contrato.qntParcelas; i++) {
         const contratoParcela: IContratoParcela = {
           numeroParcela: String(i),
-          numeroContrato: String(contrato.numeroContrato),
           status: 'PENDENTE'
         };
         contrato.parcelas.push(contratoParcela);
