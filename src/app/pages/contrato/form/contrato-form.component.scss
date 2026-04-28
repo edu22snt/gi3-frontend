@@ -28,3 +28,57 @@ mat-form-field {
 .valor {
   text-align: left !important;
 }
+
+
+
+table {
+  width: 100%;
+}
+
+td {
+  white-space: nowrap;
+}
+
+.acoes-header {
+  text-align: center;
+}
+
+.acoes-cell {
+  text-align: center;
+  padding-right: 0px;
+  white-space: nowrap;
+}
+
+.snackbar-error {
+  background: #d32f2f;
+  color: white;
+}
+
+.snackbar-success {
+  background: #4caf50;
+  color: white;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.search-field {
+  width: 350px;
+}
+
+mat-form-field {
+  font-size: 14px;
+}
+
+.posicao-print {
+  margin-top: -1%;
+}

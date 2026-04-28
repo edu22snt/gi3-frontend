@@ -4,14 +4,19 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatCardActions, MatCardContent, MatCardTitle, MatCard, MatCardModule } from "@angular/material/card";
-import { MatFormFieldModule } from "@angular/material/form-field";
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MatFormField, MatFormFieldModule, MatLabel } from "@angular/material/form-field";
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSelect, MatOption } from "@angular/material/select";
 import { NgxCurrencyDirective } from 'ngx-currency';
 import { ContratoService } from '../../../services/contrato/contrato.service';
 import { IContrato } from '../../../entities/contrato';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { IContratoParcela } from '../../../entities/contrato-parcelas';
+import { HttpResponse } from '@angular/common/http';
+// import { ContratoParcelaService } from '../../../services/contrato-parcela/contrato-parcela.service';
 
 @Component({
   selector: 'app-contrato-form',
@@ -31,7 +36,12 @@ import { IContrato } from '../../../entities/contrato';
     MatCardModule,
     MatSelect,
     MatOption,
-    NgxCurrencyDirective
+    NgxCurrencyDirective,
+    MatTableModule,
+    MatPaginator,
+    MatFormField,
+    MatLabel,
+    FormsModule
 ],
   templateUrl: './contrato-form.component.html',
   styleUrl: './contrato-form.component.scss'
@@ -42,12 +52,28 @@ export class ContratoFormComponent implements OnInit {
   isViewMode = false;
   isEditMode = false;
 
-    constructor(
+  dataSource = new MatTableDataSource<IContratoParcela>();
+  idContrato: string = "";
+
+  displayedColumns: string[] = [
+    'numeroContrato',
+    'numeroParcela',
+    'status',
+    'acoes'
+  ];
+
+  totalElements = 0;
+  pageSize = 10;
+  pageIndex = 0;
+  searchItem = '';
+
+  constructor(
       private fb: FormBuilder,
       private router: Router,
       private route: ActivatedRoute,
       private snackBar: MatSnackBar,
       private service: ContratoService
+      // private serviceParcela: ContratoParcelaService
     ) {
     this.form = this.fb.group({
       id: [''],
@@ -77,9 +103,21 @@ export class ContratoFormComponent implements OnInit {
   salvar(): void {
     if (this.form.valid) {
       const contrato: IContrato = this.form.value;
+      contrato.parcelas = [];
+
+      for (let i = 1; i <= contrato.qntParcelas; i++) {
+        const contratoParcela: IContratoParcela = {
+          numeroParcela: String(i),
+          numeroContrato: String(contrato.numeroContrato),
+          status: 'PENDENTE'
+        };
+        contrato.parcelas.push(contratoParcela);
+      }
+
       this.service.create(contrato).subscribe({
         next: () => {
         this.voltar();
+        // this.salvarParcelas(contrato);
         this.snackBar.open('Salvo com sucesso!', 'Fechar', {
           duration: 3000,
           horizontalPosition: 'right',
@@ -95,6 +133,32 @@ export class ContratoFormComponent implements OnInit {
       });
     }
   }
+
+  // salvarParcelas(contrato: IContrato): void {
+  //   for (let i = 1; i <= contrato.qntParcelas; i++) {
+  //     const contratoParcela: IContratoParcela = {
+  //       numeroParcela: String(i),
+  //       numeroContrato: String(contrato.numeroContrato),
+  //       status: 'PENDENTE'
+  //     };
+
+  //     this.serviceParcela.create(contratoParcela).subscribe({
+  //       next: () => {
+  //         this.snackBar.open('Salvo com sucesso!', 'Fechar', {
+  //           duration: 3000,
+  //           horizontalPosition: 'right',
+  //           verticalPosition: 'top'
+  //         });
+  //       },
+  //       error: () => {
+  //         this.snackBar.open('Erro ao salvar', 'Fechar', {
+  //           duration: 3000,
+  //           panelClass: ['snackbar-error']
+  //         });
+  //       }
+  //     });
+  //   }
+  // }
 
   update(): void {
     if (this.form.valid) {
@@ -127,9 +191,33 @@ export class ContratoFormComponent implements OnInit {
     this.service.find(id).subscribe(res => {
       console.log('Dados carregados:', res);
       if (res.body) {
+        this.idContrato = res.body.numeroContrato;
         this.form.patchValue(res.body);
+        this.loadData();
       }
     });
+  }
+
+  onPageChange(event: PageEvent): void {
+    this.pageIndex = event.pageIndex;
+    this.pageSize = event.pageSize;
+    this.loadData();
+  }
+
+  loadData(): void {
+    this.service.searchByKeyword(this.idContrato, this.pageIndex, this.pageSize).subscribe({
+      next: (res: HttpResponse<IContratoParcela[]>) => {
+        this.onSuccess(res.body);
+      },
+      error: (erro) => {
+        console.error('Erro ao carregar dados', erro);
+      }
+    });
+  }
+
+  protected onSuccess(data: any): void {
+    this.dataSource.data = data.content[0].parcelas;
+    this.totalElements = data.totalElements;
   }
 
 }
