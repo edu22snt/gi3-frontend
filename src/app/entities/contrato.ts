@@ -1,9 +1,10 @@
 import { ContratoParcela } from "./contrato-parcelas";
+import { IVendedor } from "./vendedor";
 
 export interface IContrato {
     id: number;
     numeroContrato: string;
-    vendedor: string;
+    vendedor: IVendedor;
     tipo: string;
     empresa: string;
     qntParcelas: number;
@@ -15,7 +16,7 @@ export class Contrato implements IContrato {
     constructor(
         public id: number,
         public numeroContrato: string,
-        public vendedor: string,
+        public vendedor: IVendedor,
         public tipo: string,
         public empresa: string,
         public qntParcelas: number,

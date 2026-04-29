@@ -1,0 +1,52 @@
+<form [formGroup]="form" class="form-container">
+
+  <mat-card class="title">
+    <mat-card-title>Cadastro de Prestação de Serviço</mat-card-title>
+
+    <mat-card-content>
+
+      <div class="form-grid">
+
+        <mat-form-field appearance="outline">
+          <mat-label>Nome</mat-label>
+          <input matInput formControlName="nome" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>E-mail</mat-label>
+          <input matInput formControlName="email" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Telefone</mat-label>
+          <input matInput formControlName="telefone" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Status</mat-label>
+          <mat-select formControlName="status">
+            <mat-option value="ativo">Ativo</mat-option>
+            <mat-option value="inativo">Inativo</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+    </mat-card-content>
+
+    <mat-card-actions align="end">
+      <button mat-stroked-button type="button" (click)="voltar()">Voltar</button>
+      @if (!isViewMode && !isEditMode) {
+        <button mat-raised-button color="primary" (click)="salvar()" [disabled]="form.invalid">
+          Salvar
+        </button>
+      }
+      @if (!isViewMode && isEditMode) {
+        <button mat-raised-button color="primary" (click)="update()" [disabled]="form.invalid">
+          Atualizar
+        </button>
+      }
+    </mat-card-actions>
+
+  </mat-card>
+
+</form>

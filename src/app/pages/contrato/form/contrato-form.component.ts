@@ -18,6 +18,8 @@ import { HttpResponse } from '@angular/common/http';
 import { IContrato } from '../../../entities/contrato';
 import { CommonModule } from '@angular/common';
 import { ContratoParcelaService } from '../../../services/contrato-parcela/contrato-parcela.service';
+import { IVendedor } from '../../../entities/vendedor';
+import { VendedorService } from '../../../services/vendedor/vendedor.service';
 
 @Component({
   selector: 'app-contrato-form',
@@ -59,9 +61,9 @@ export class ContratoFormComponent implements OnInit {
 
   displayedColumns: string[] = [
     'numeroParcela',
-    'porcentagemComissao',
     'base',
     'comissao',
+    'descontoComissao',
     'liquido',
     'status'
   ];
@@ -71,18 +73,20 @@ export class ContratoFormComponent implements OnInit {
   pageIndex = 0;
   searchItem = '';
 
+  vendedores: IVendedor[] = [];
+
   constructor(
       private fb: FormBuilder,
       private router: Router,
       private route: ActivatedRoute,
       private snackBar: MatSnackBar,
       private service: ContratoService,
-      private serviceParcela: ContratoParcelaService
+      private vendedorService: VendedorService
     ) {
     this.form = this.fb.group({
       id: [''],
       numeroContrato: ['', Validators.required],
-      vendedor: ['', Validators.required],
+      vendedor: [null],
       tipo: ['', Validators.required],
       empresa: ['', Validators.required],
       qntParcelas: ['', Validators.required],
@@ -95,6 +99,7 @@ export class ContratoFormComponent implements OnInit {
     const url = this.route.snapshot.routeConfig?.path;
     this.isViewMode = url?.includes('view') || false;
     this.isEditMode = url?.includes('edit') || false;
+    this.loadVendedores();
 
     if (id) {
       this.loadById(+id);
@@ -188,6 +193,21 @@ export class ContratoFormComponent implements OnInit {
         console.error('Erro ao carregar dados', erro);
       }
     });
+  }
+
+  loadVendedores(): void {
+    this.vendedorService.findAll().subscribe({
+      next: (data) => {
+        this.onSuccessVendedores(data.body);
+      },
+      error: (error) => {
+        console.error('Erro ao carregar vendedores', error);
+      }
+    });
+  }
+
+  protected onSuccessVendedores(data: any): void {
+    this.vendedores = data.content;
   }
 
   protected onSuccess(data: any): void {

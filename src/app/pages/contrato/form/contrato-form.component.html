@@ -12,11 +12,22 @@
           <input matInput formControlName="numeroContrato" />
         </mat-form-field>
 
-        <mat-form-field appearance="outline">
+        <!-- <mat-form-field appearance="outline">
           <mat-label>Vendedor</mat-label>
           <input matInput formControlName="vendedor" />
-        </mat-form-field>
+        </mat-form-field> -->
 
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Vendedor</mat-label>
+          <mat-select formControlName="vendedor">
+            @for (item of vendedores; track $index) {
+              <mat-option
+                [value]="item">
+                {{ item.nome }}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
         <mat-form-field appearance="outline">
             <mat-label>Tipo do bem</mat-label>
             <mat-select formControlName="tipo">
@@ -70,28 +81,28 @@
     @if (idContrato) {
       <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 full-width">
         <ng-container matColumnDef="numeroParcela">
-          <th mat-header-cell *matHeaderCellDef> Número da Parcela </th>
+          <th mat-header-cell *matHeaderCellDef> Parcela </th>
           <td mat-cell *matCellDef="let element"> {{ element.numeroParcela }} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="porcentagemComissao">
-          <th mat-header-cell *matHeaderCellDef> % Comissão </th>
-          <td mat-cell *matCellDef="let element"> {{ element.porcentagemComissao }} </td>
         </ng-container>
 
         <ng-container matColumnDef="base">
           <th mat-header-cell *matHeaderCellDef> Base </th>
-          <td mat-cell *matCellDef="let element"> {{ element.base }} </td>
+          <td mat-cell *matCellDef="let element"> {{ element.base | currency:'BRL'  }} </td>
         </ng-container>
 
         <ng-container matColumnDef="comissao">
           <th mat-header-cell *matHeaderCellDef> Comissão </th>
-          <td mat-cell *matCellDef="let element"> {{ element.comissao }} </td>
+          <td mat-cell *matCellDef="let element"> {{ element.comissao | currency:'BRL'  }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="descontoComissao">
+          <th mat-header-cell *matHeaderCellDef> Desconto </th>
+          <td mat-cell *matCellDef="let element"> {{ element.descontoComissao | currency:'BRL'  }} </td>
         </ng-container>
 
         <ng-container matColumnDef="liquido">
           <th mat-header-cell *matHeaderCellDef> Valor Líquido </th>
-          <td mat-cell *matCellDef="let element"> {{ element.liquido }} </td>
+          <td mat-cell *matCellDef="let element"> {{ element.liquido | currency:'BRL'  }} </td>
         </ng-container>
 
         <ng-container matColumnDef="status">

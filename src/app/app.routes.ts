@@ -118,6 +118,30 @@ export const routes: Routes = [
             .then(m => m.RepasseHsFormComponent)
       },
       {
+        path: 'vendedor',
+        loadComponent: () =>
+          import('./pages/vendedor/vendedor.component')
+            .then(m => m.VendedorComponent)
+      },
+      {
+        path: 'vendedor-form',
+        loadComponent: () =>
+          import('./pages/vendedor/form/vendedor-form.component')
+            .then(m => m.VendedorFormComponent)
+      },
+      {
+        path: 'vendedor/view/:id',
+        loadComponent: () =>
+          import('./pages/vendedor/form/vendedor-form.component')
+            .then(m => m.VendedorFormComponent)
+      },
+      {
+        path: 'vendedor/edit/:id',
+        loadComponent: () =>
+          import('./pages/vendedor/form/vendedor-form.component')
+            .then(m => m.VendedorFormComponent)
+      },
+      {
         path: 'usuario',
         loadComponent: () =>
           import('./pages/usuario/usuario.component')

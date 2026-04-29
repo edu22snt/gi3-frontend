@@ -4,7 +4,7 @@ export interface IContratoParcela {
     id?: number;
     numeroParcela?: string;
     status?: string;
-    porcentagemComissao?: number;
+    descontoComissao?: number;
     base?: number;
     comissao?: number;
     liquido?: number;
@@ -15,7 +15,7 @@ export class ContratoParcela implements IContratoParcela {
         public id?: number,
         public numeroParcela?: string,
         public status?: string,
-        public porcentagemComissao?: number,
+        public descontoComissao?: number,
         public base?: number,
         public comissao?: number,
         public liquido?: number,
