@@ -29,13 +29,14 @@
       <mat-icon>search</mat-icon>
     </button>
 
-    <button
-      *ngIf="searchItem"
-      mat-icon-button
-      matSuffix
-      (click)="searchItem = ''; searchByKeyword()">
-      <mat-icon>close</mat-icon>
-    </button>
+    @if (searchItem) {
+      <button
+        mat-icon-button
+        matSuffix
+        (click)="searchItem = ''; searchByKeyword()">
+        <mat-icon>close</mat-icon>
+      </button>
+    }
 
   </mat-form-field>
   <button
@@ -77,9 +78,9 @@
         <mat-icon>visibility</mat-icon>
       </button>
 
-      <button mat-icon-button color="accent" [routerLink]="['/contrato/edit', element.id]">
+      <!-- <button mat-icon-button color="accent" [routerLink]="['/contrato/edit', element.id]">
         <mat-icon>edit</mat-icon>
-      </button>
+      </button> -->
 
       <button mat-icon-button color="warn" (click)="confirmDelete(element.id)">
         <mat-icon>delete</mat-icon>

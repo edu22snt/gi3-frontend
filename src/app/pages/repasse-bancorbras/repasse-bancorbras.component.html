@@ -29,13 +29,14 @@
       <mat-icon>search</mat-icon>
     </button>
 
-    <button
-      *ngIf="searchItem"
-      mat-icon-button
-      matSuffix
-      (click)="searchItem = ''; searchByKeyword()">
-      <mat-icon>close</mat-icon>
-    </button>
+    @if (searchItem) {
+      <button
+        mat-icon-button
+        matSuffix
+        (click)="searchItem = ''; searchByKeyword()">
+        <mat-icon>close</mat-icon>
+      </button>
+    }
     
   </mat-form-field>
   

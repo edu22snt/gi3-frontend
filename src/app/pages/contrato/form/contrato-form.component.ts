@@ -11,11 +11,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MatSelect, MatOption } from "@angular/material/select";
 import { NgxCurrencyDirective } from 'ngx-currency';
 import { ContratoService } from '../../../services/contrato/contrato.service';
-import { IContrato } from '../../../entities/contrato';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { IContratoParcela } from '../../../entities/contrato-parcelas';
 import { HttpResponse } from '@angular/common/http';
+import { IContrato } from '../../../entities/contrato';
+import { CommonModule } from '@angular/common';
+import { ContratoParcelaService } from '../../../services/contrato-parcela/contrato-parcela.service';
 
 @Component({
   selector: 'app-contrato-form',
@@ -40,7 +42,8 @@ import { HttpResponse } from '@angular/common/http';
     MatPaginator,
     MatFormField,
     MatLabel,
-    FormsModule
+    FormsModule,
+    CommonModule
 ],
   templateUrl: './contrato-form.component.html',
   styleUrl: './contrato-form.component.scss'
@@ -73,7 +76,8 @@ export class ContratoFormComponent implements OnInit {
       private router: Router,
       private route: ActivatedRoute,
       private snackBar: MatSnackBar,
-      private service: ContratoService
+      private service: ContratoService,
+      private serviceParcela: ContratoParcelaService
     ) {
     this.form = this.fb.group({
       id: [''],
@@ -116,7 +120,6 @@ export class ContratoFormComponent implements OnInit {
       this.service.create(contrato).subscribe({
         next: () => {
         this.voltar();
-        // this.salvarParcelas(contrato);
         this.snackBar.open('Salvo com sucesso!', 'Fechar', {
           duration: 3000,
           horizontalPosition: 'right',
@@ -132,32 +135,6 @@ export class ContratoFormComponent implements OnInit {
       });
     }
   }
-
-  // salvarParcelas(contrato: IContrato): void {
-  //   for (let i = 1; i <= contrato.qntParcelas; i++) {
-  //     const contratoParcela: IContratoParcela = {
-  //       numeroParcela: String(i),
-  //       numeroContrato: String(contrato.numeroContrato),
-  //       status: 'PENDENTE'
-  //     };
-
-  //     this.serviceParcela.create(contratoParcela).subscribe({
-  //       next: () => {
-  //         this.snackBar.open('Salvo com sucesso!', 'Fechar', {
-  //           duration: 3000,
-  //           horizontalPosition: 'right',
-  //           verticalPosition: 'top'
-  //         });
-  //       },
-  //       error: () => {
-  //         this.snackBar.open('Erro ao salvar', 'Fechar', {
-  //           duration: 3000,
-  //           panelClass: ['snackbar-error']
-  //         });
-  //       }
-  //     });
-  //   }
-  // }
 
   update(): void {
     if (this.form.valid) {
@@ -188,7 +165,6 @@ export class ContratoFormComponent implements OnInit {
 
   loadById(id: number): void {
     this.service.find(id).subscribe(res => {
-      console.log('Dados carregados:', res);
       if (res.body) {
         this.idContrato = res.body.numeroContrato;
         this.form.patchValue(res.body);

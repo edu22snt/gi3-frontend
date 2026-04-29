@@ -78,7 +78,6 @@ export class ContratoComponent implements OnInit {
 
   searchByKeyword(): void {
     this.pageIndex = 0;
-    console.log('Parâmetro de busca:', this.searchItem);
     this.service.searchByKeyword(this.searchItem, this.pageIndex, this.pageSize).subscribe({
       next: (res: HttpResponse<IContrato[]>) => {
         this.onSuccess(res.body);

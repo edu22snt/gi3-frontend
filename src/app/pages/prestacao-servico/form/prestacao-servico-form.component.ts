@@ -124,7 +124,6 @@ export class PrestacaoServicoFormComponent implements OnInit {
 
   loadById(id: number): void {
     this.service.find(id).subscribe(res => {
-      console.log('Dados carregados:', res);
       if (res.body) {
         this.form.patchValue(res.body);
       }

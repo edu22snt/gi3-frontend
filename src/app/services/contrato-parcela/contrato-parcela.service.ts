@@ -18,7 +18,7 @@ export class ContratoParcelaService {
     private http: HttpClient,
     protected applicationConfigService: ApplicationConfigService
   ) {
-    this.resourceUrl = this.applicationConfigService.getEndpointFor('http://localhost:8080/api/contrato-parcela');
+    this.resourceUrl = this.applicationConfigService.getEndpointFor('http://localhost:8080/api/contratoParcela');
   }
 
   create(contrato: IContratoParcela): Observable<EntityResponseType> {
