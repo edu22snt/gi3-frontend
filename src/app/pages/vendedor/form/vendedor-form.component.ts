@@ -70,24 +70,25 @@ export class VendedorFormComponent implements OnInit {
       this.form.disable();
     }
   }
-
+  
   salvar(): void {
     if (this.form.valid) {
       const vendedor: IVendedor = this.form.value;
       this.service.create(vendedor).subscribe({
         next: () => {
-        this.voltar();
-        this.snackBar.open('Salvo com sucesso!', 'Fechar', {
-          duration: 3000,
-          horizontalPosition: 'right',
-          verticalPosition: 'top'
-        });
+          this.voltar();
+          this.snackBar.open('Salvo com sucesso!', 'Fechar', {
+            duration: 3000,
+            horizontalPosition: 'right',
+            verticalPosition: 'top'
+          });
         },
         error: () => {
-        this.snackBar.open('Erro ao salvar', 'Fechar', {
-          duration: 3000,
-          panelClass: ['snackbar-error']
-        });
+
+          this.snackBar.open('Erro ao salvar, possivelmente já exista um vendedor com esse nome.', 'Fechar', {
+            duration: 3000,
+            panelClass: ['snackbar-error']
+          });
         }
       });
     }
