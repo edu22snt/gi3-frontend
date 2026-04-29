@@ -15,11 +15,39 @@
         <mat-form-field appearance="outline">
           <mat-label>E-mail</mat-label>
           <input matInput formControlName="email" />
+
+          @if (form.get('email')?.hasError('required')) {
+            <mat-error>
+              E-mail é obrigatório
+            </mat-error>
+          }
+
+          @if (form.get('email')?.hasError('email')) {
+            <mat-error>
+              E-mail inválido
+            </mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field appearance="outline">
           <mat-label>Telefone</mat-label>
-          <input matInput formControlName="telefone" />
+          <input
+            matInput
+            formControlName="telefone"
+            (input)="formatarTelefone($event)"
+            placeholder="(99) 99999-9999" />
+
+            @if (form.get('telefone')?.hasError('required')) {
+              <mat-error>
+                Telefone é obrigatório
+              </mat-error>
+            }
+
+            @if (form.get('telefone')?.hasError('pattern')) {
+              <mat-error>
+                Telefone inválido
+              </mat-error>
+            }
         </mat-form-field>
 
         <mat-form-field appearance="outline">

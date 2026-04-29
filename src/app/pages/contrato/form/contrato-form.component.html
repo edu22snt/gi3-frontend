@@ -20,10 +20,10 @@
         <mat-form-field appearance="outline" class="full-width">
           <mat-label>Vendedor</mat-label>
           <mat-select formControlName="vendedor">
-            @for (item of vendedores; track $index) {
+            @for (vendedor of vendedores; track $index) {
               <mat-option
-                [value]="item">
-                {{ item.nome }}
+                [value]="vendedor">
+                {{ vendedor.nome }}
               </mat-option>
             }
           </mat-select>
@@ -59,8 +59,8 @@
           <mat-form-field appearance="outline">
             <mat-label>Quantidade de parcelas</mat-label>
             <mat-select formControlName="qntParcelas">
-              <mat-option value="13">13 parcelas</mat-option>
-              <mat-option value="24">24 parcelas</mat-option>
+              <mat-option [value]="13">13 parcelas</mat-option>
+              <mat-option [value]="24">24 parcelas</mat-option>
             </mat-select>
           </mat-form-field>
         }
@@ -69,7 +69,7 @@
           <mat-form-field appearance="outline">
             <mat-label>Quantidade de parcelas</mat-label>
             <mat-select formControlName="qntParcelas">
-              <mat-option value="5">5 parcelas</mat-option>
+              <mat-option [value]="5">5 parcelas</mat-option>
             </mat-select>
           </mat-form-field>
         }

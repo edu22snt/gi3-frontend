@@ -10,7 +10,6 @@ import { MatInputModule } from '@angular/material/input';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IPrestacaoServico } from '../../../entities/prestacao-servico';
 import { MatSelect, MatOption } from "@angular/material/select";
-import { NgxCurrencyDirective } from 'ngx-currency';
 import { VendedorService } from '../../../services/vendedor/vendedor.service';
 import { IVendedor } from '../../../entities/vendedor';
 
@@ -31,8 +30,7 @@ import { IVendedor } from '../../../entities/vendedor';
     MatInputModule,
     MatCardModule,
     MatSelect,
-    MatOption,
-    NgxCurrencyDirective
+    MatOption
 ],
   templateUrl: './vendedor-form.component.html',
   styleUrl: './vendedor-form.component.scss'
@@ -55,7 +53,7 @@ export class VendedorFormComponent implements OnInit {
       nome: ['', Validators.required],
       email: ['', Validators.required],
       telefone: ['', Validators.required],
-      status: [''],
+      status: ['', Validators.required],
     });
   }
 
@@ -127,6 +125,19 @@ export class VendedorFormComponent implements OnInit {
       if (res.body) {
         this.form.patchValue(res.body);
       }
+    });
+  }
+
+  formatarTelefone(event: any): void {
+    let valor = event.target.value.replace(/\D/g, '');
+
+    valor = valor.replace(/^(\d{2})(\d)/g, '($1) $2');
+    valor = valor.replace(/(\d{5})(\d)/, '$1-$2');
+
+    valor = valor.substring(0, 15);
+
+    this.form.get('telefone')?.setValue(valor, {
+      emitEvent: false
     });
   }
 

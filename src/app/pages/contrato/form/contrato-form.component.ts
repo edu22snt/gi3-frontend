@@ -99,14 +99,14 @@ export class ContratoFormComponent implements OnInit {
     const url = this.route.snapshot.routeConfig?.path;
     this.isViewMode = url?.includes('view') || false;
     this.isEditMode = url?.includes('edit') || false;
-    this.loadVendedores();
-
+    
     if (id) {
       this.loadById(+id);
     }
     if (this.isViewMode) {
       this.form.disable();
     }
+    this.loadVendedores(id);
   }
 
   salvar(): void {
@@ -172,7 +172,14 @@ export class ContratoFormComponent implements OnInit {
     this.service.find(id).subscribe(res => {
       if (res.body) {
         this.idContrato = res.body.numeroContrato;
-        this.form.patchValue(res.body);
+        const vendedorSelecionado = this.vendedores.find(
+          v => v.id === res.body?.vendedor?.id
+        );
+
+        this.form.patchValue({
+          ...res.body,
+          vendedor: vendedorSelecionado
+        });
         this.loadData();
       }
     });
@@ -195,15 +202,23 @@ export class ContratoFormComponent implements OnInit {
     });
   }
 
-  loadVendedores(): void {
+  loadVendedores(id?: string | null): void {
     this.vendedorService.findAll().subscribe({
       next: (data) => {
         this.onSuccessVendedores(data.body);
+
+        if (id) {
+          this.loadById(+id);
+        }
       },
       error: (error) => {
         console.error('Erro ao carregar vendedores', error);
       }
     });
+  }
+
+  compareVendedor(v1: IVendedor, v2: IVendedor): boolean {
+    return v1 && v2 ? v1.id === v2.id : v1 === v2;
   }
 
   protected onSuccessVendedores(data: any): void {
@@ -213,6 +228,7 @@ export class ContratoFormComponent implements OnInit {
   protected onSuccess(data: any): void {
     this.dataSource.data = data.content[0].parcelas;
     this.totalElements = data.totalElements;
+    console.log(">>>>>>>>>>>>>>>>>>>>>>> ", data.content);
   }
 
 }
