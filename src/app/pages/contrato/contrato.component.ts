@@ -135,7 +135,7 @@ export class ContratoComponent implements OnInit {
   }
 
   imprimir(): void {
-    this.relatorioService.relatorioHs(this.searchItem);
+    this.relatorioService.relatorioContratos(this.searchItem);
   }
 
 }

@@ -228,7 +228,6 @@ export class ContratoFormComponent implements OnInit {
   protected onSuccess(data: any): void {
     this.dataSource.data = data.content[0].parcelas;
     this.totalElements = data.totalElements;
-    console.log(">>>>>>>>>>>>>>>>>>>>>>> ", data.content);
   }
 
 }

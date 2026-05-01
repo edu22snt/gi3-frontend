@@ -135,7 +135,7 @@ export class VendedorComponent implements OnInit {
   }
 
   imprimir(): void {
-    this.relatorioService.relatorioHs(this.searchItem);
+    this.relatorioService.relatorioVendedores(this.searchItem);
   }
 
 }

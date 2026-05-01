@@ -48,4 +48,26 @@ export class RelatorioService {
 
     });
   }
+
+  relatorioContratos(param: string): void {
+    this.http.get(`${this.resourceUrl}/contratos?param=${param}`, {
+      responseType: 'blob'
+    }).subscribe((blob: Blob) => {
+
+      const url = window.URL.createObjectURL(blob);
+      window.open(url);
+
+    });
+  }
+
+  relatorioVendedores(param: string): void {
+    this.http.get(`${this.resourceUrl}/vendedores?param=${param}`, {
+      responseType: 'blob'
+    }).subscribe((blob: Blob) => {
+
+      const url = window.URL.createObjectURL(blob);
+      window.open(url);
+
+    });
+  }
 }
