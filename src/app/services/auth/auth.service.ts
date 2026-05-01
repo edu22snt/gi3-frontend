@@ -1,18 +1,20 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { tap } from 'rxjs';
+import { environment } from '../../core/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  protected domain: string | undefined;
 
-  private api = 'http://localhost:8080';
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.domain = environment.domain;
+   }
 
   login ( username: string, password: string ) {
-    return this.http.post<any>(`${this.api}/api/authenticate`, { username, password }).pipe(
+    return this.http.post<any>(`${this.domain}/api/authenticate`, { username, password }).pipe(
       tap(response => {
         this.saveToken(response.jwt);
       })
