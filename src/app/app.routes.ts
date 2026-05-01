@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { authGuard } from './core/guards/auth.guard';
+import { Authority } from './core/config/authority.constants';
 
 export const routes: Routes = [
   {
@@ -41,6 +42,9 @@ export const routes: Routes = [
       },
       {
         path: 'contrato/edit/:id',
+        data: {
+          authorities: [Authority.ADMIN],
+        },
         loadComponent: () =>
           import('./pages/contrato/form/contrato-form.component')
             .then(m => m.ContratoFormComponent)
@@ -65,6 +69,9 @@ export const routes: Routes = [
       },
       {
         path: 'prestacao-servico/edit/:id',
+        data: {
+          authorities: [Authority.ADMIN],
+        },
         loadComponent: () =>
           import('./pages/prestacao-servico/form/prestacao-servico-form.component')
             .then(m => m.PrestacaoServicoFormComponent)
@@ -89,6 +96,9 @@ export const routes: Routes = [
       },
       {
         path: 'repasse-bancorbras-form/edit/:id',
+        data: {
+          authorities: [Authority.ADMIN],
+        },
         loadComponent: () =>
           import('./pages/repasse-bancorbras/form/repasse-bancorbras-form.component')
             .then(m => m.RepasseBancorbrasFormComponent)
@@ -113,6 +123,9 @@ export const routes: Routes = [
       },
       {
         path: 'repasse-hs-form/edit/:id',
+        data: {
+          authorities: [Authority.ADMIN],
+        },
         loadComponent: () =>
           import('./pages/repasse-hs/form/repasse-hs-form.component')
             .then(m => m.RepasseHsFormComponent)
@@ -137,6 +150,9 @@ export const routes: Routes = [
       },
       {
         path: 'vendedor/edit/:id',
+        data: {
+          authorities: [Authority.ADMIN],
+        },
         loadComponent: () =>
           import('./pages/vendedor/form/vendedor-form.component')
             .then(m => m.VendedorFormComponent)
@@ -161,6 +177,9 @@ export const routes: Routes = [
       },
       {
         path: 'usuario-form/edit/:id',
+        data: {
+          authorities: [Authority.ADMIN],
+        },
         loadComponent: () =>
           import('./pages/usuario/form/usuario-form.component')
             .then(m => m.UsuarioFormComponent)

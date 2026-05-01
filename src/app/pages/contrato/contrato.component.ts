@@ -14,6 +14,7 @@ import { Router, RouterLink } from '@angular/router';
 import { RelatorioService } from '../../services/relatorio/relatorio.service';
 import { ContratoService } from '../../services/contrato/contrato.service';
 import { IContrato } from '../../entities/contrato';
+import { MensagemSistamaEnum } from '../../core/config/enuns/mensagem-sistema.constants';
 
 @Component({
   selector: 'app-contrato',
@@ -71,7 +72,7 @@ export class ContratoComponent implements OnInit {
         this.onSuccess(res.body);
       },
       error: (erro) => {
-        console.error('Erro ao carregar dados', erro);
+        console.error(MensagemSistamaEnum.ERRO_CARREGAR_DADOS, erro);
       }
     });
   }
@@ -83,7 +84,7 @@ export class ContratoComponent implements OnInit {
         this.onSuccess(res.body);
       },
       error: (erro) => {
-        console.error('Erro ao carregar dados', erro);
+        console.error(MensagemSistamaEnum.ERRO_CARREGAR_DADOS, erro);
       }
     });
   }
@@ -115,14 +116,14 @@ export class ContratoComponent implements OnInit {
     this.service.delete(id).subscribe({
       next: () => {
         this.loadData();
-        this.snackBar.open('Excluído com sucesso', 'Fechar', {
+        this.snackBar.open(MensagemSistamaEnum.SUCESSO_EXCLUSAO, 'Fechar', {
           duration: 3000,
           horizontalPosition: 'right',
           verticalPosition: 'top'
         });
       },
       error: () => {
-        this.snackBar.open('Erro ao excluir', 'Fechar', {
+        this.snackBar.open(MensagemSistamaEnum.ERRO_EXCLUSAO, 'Fechar', {
           duration: 3000,
           panelClass: ['snackbar-error']
         });
