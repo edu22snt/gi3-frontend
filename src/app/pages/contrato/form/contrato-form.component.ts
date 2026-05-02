@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
@@ -72,8 +72,11 @@ export class ContratoFormComponent implements OnInit {
   pageSize = 10;
   pageIndex = 0;
   searchItem = '';
-
+  codigo = 0;
+  
   vendedores: IVendedor[] = [];
+  
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(
       private fb: FormBuilder,
@@ -81,6 +84,7 @@ export class ContratoFormComponent implements OnInit {
       private route: ActivatedRoute,
       private snackBar: MatSnackBar,
       private service: ContratoService,
+      private serviceParcelas: ContratoParcelaService,
       private vendedorService: VendedorService
     ) {
     this.form = this.fb.group({
@@ -102,11 +106,15 @@ export class ContratoFormComponent implements OnInit {
     
     if (id) {
       this.loadById(+id);
+      this.codigo = id ? +id : 0;
+      this.loadData();
+      console.log("id >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ", id);
     }
     if (this.isViewMode) {
       this.form.disable();
     }
     this.loadVendedores(id);
+
   }
 
   salvar(): void {
@@ -180,20 +188,13 @@ export class ContratoFormComponent implements OnInit {
           ...res.body,
           vendedor: vendedorSelecionado
         });
-        this.loadData();
       }
     });
   }
 
-  onPageChange(event: PageEvent): void {
-    this.pageIndex = event.pageIndex;
-    this.pageSize = event.pageSize;
-    this.loadData();
-  }
-
   loadData(): void {
-    this.service.searchByKeyword(this.idContrato, this.pageIndex, this.pageSize).subscribe({
-      next: (res: HttpResponse<IContratoParcela[]>) => {
+    this.service.find(this.codigo).subscribe({
+      next: (res: HttpResponse<IContrato>) => {
         this.onSuccess(res.body);
       },
       error: (erro) => {
@@ -221,13 +222,23 @@ export class ContratoFormComponent implements OnInit {
     return v1 && v2 ? v1.id === v2.id : v1 === v2;
   }
 
+  onPageChange(event: PageEvent): void {
+    this.pageIndex = event.pageIndex;
+    this.pageSize = event.pageSize;
+    this.loadData();
+  }
+
   protected onSuccessVendedores(data: any): void {
     this.vendedores = data.content;
   }
 
   protected onSuccess(data: any): void {
-    this.dataSource.data = data.content[0].parcelas;
+    this.dataSource.data = data.parcelas;
     this.totalElements = data.totalElements;
+  }
+
+  protected popularParcelas(item: any): void {
+    this.dataSource.data = item.parcelas;
   }
 
 }
